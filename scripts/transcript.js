@@ -916,6 +916,14 @@ async function transferGuestConversations() {
                 localStorage.removeItem(GUEST_CONVERSATIONS_KEY);
                 console.log('🧹 Cleared guest conversations from localStorage after transfer');
             } catch (_) {}
+            // Reîncarcă conversația din contul logat pentru a reflecta instant conversația transferată
+            try {
+                isConversationLoaded = false;
+                await loadConversationWhenReady();
+                console.log('🔄 Reloaded conversation after guest transfer');
+            } catch (err) {
+                console.warn('❌ Failed to reload conversation after guest transfer:', err);
+            }
         }
     } catch (error) {
         console.error('❌ Error transferring guest conversations:', error);
