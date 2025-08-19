@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Transcript Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/transcript_style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/logo.png">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQD2M74CVJ"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YQD2M74CVJ');
+        </script>
+</head>
+<body>
+    <div class="app">
+        <div class="navbar-container">
+            <div class="navbar">
+                <div class="navbar-left">
+                    <div class="burger-menu" role="button" id="burger-menu">
+                        <img class="burger-menu-image" src="icons/hamburger-menu.svg" alt="Menu">
+                        <div class="burger-dropdown-menu" id="burger-dropdown-menu">
+                            <a href="contact.html" class="burger-menu-item">Contact</a>
+                            <a href="pricing.html" class="burger-menu-item">Pricing</a>
+                            <a href="index.html#about" class="burger-menu-item">About Us</a>
+                            <a href="index.html#faq" class="burger-menu-item">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-mid">
+                    <a href="index.html" class="navbar-logo-title">
+                        <img src="icons/logo.png" class="navbar-logo-image" alt="Logo">
+                        <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
+                    </a>
+                </div>
+                <div class="navbar-right">
+                    <!-- Pricing Link (left of coins) -->
+                    <a href="pricing.html" class="pricing-link" title="View pricing">Pricing</a>
+                    <!-- Credits Display -->
+                    <div class="credits-display" id="credits-display">
+                        <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span>
+                        <span class="credits-amount" id="credits-amount">3</span>
+                    </div>
+                    
+                    <!-- Login/Profile Section -->
+                    <div class="auth-section">
+                        <!-- Login Button (when not logged in) -->
+                        <button id="login-btn" class="login-button" style="display: none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                <polyline points="10,17 15,12 10,7"/>
+                                <line x1="15" y1="12" x2="3" y2="12"/>
+                            </svg>
+                            Login
+                        </button>
+                        
+                        <!-- Profile Section (when logged in) -->
+                        <div id="profile-section" class="profile-section" style="display: none;">
+                            <div class="profile-container">
+                                <img id="profile-picture" class="profile-picture" src="" alt="Profile">
+                                <div class="profile-dropdown" id="profile-dropdown">
+                                    <div class="profile-info">
+                                        <div class="profile-text">
+                                            <div class="profile-name" id="profile-name">Loading...</div>
+                                            <div class="profile-email" id="profile-email">Loading...</div>
+                                        </div>
+                                        <div class="profile-credits-pill" id="profile-credits-pill" title="Your coins">
+                                            <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span>
+                                            <span class="credits-amount" id="credits-amount-profile">0</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Conversation History Section -->
+                                    <div class="conversation-history-section" id="conversation-history-section">
+                                        <div class="history-header">
+                                            <span class="history-title">💬 Conversation History</span>
+                                            <button class="clear-all-btn" id="clear-all-conversations" title="Clear all conversations">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="conversation-list" id="conversation-list">
+                                            <div class="loading-conversations">Loading conversations...</div>
+                                        </div>
+                                        <div class="show-all-container" id="show-all-container" style="display: none;">
+                                            <button class="show-all-btn" id="show-all-conversations">Show All</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="profile-actions">
+                                        <button id="logout-btn" class="logout-button">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                                <polyline points="16,17 21,12 16,7"/>
+                                                <line x1="21" y1="12" x2="9" y2="12"/>
+                                            </svg>
+                                            Logout
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="loading-container" id="loading-container">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <h2>Loading...</h2>
+                    <p>Please wait while we process your request</p>
+                    <div class="loading-steps">
+                        <div class="steps-inner">
+                        <div class="step active" id="step-1">
+                            <span class="step-number">1</span>
+                            <span class="step-text">Connecting to service</span>
+                        </div>
+                        <div class="step" id="step-2">
+                            <span class="step-number">2</span>
+                            <span class="step-text">Analyzing video content</span>
+                        </div>
+                        <div class="step" id="step-3">
+                            <span class="step-number">3</span>
+                            <span class="step-text">Processing speech data</span>
+                        </div>
+                        <div class="step" id="step-4">
+                            <span class="step-number">4</span>
+                            <span class="step-text">Extracting audio streams</span>
+                        </div>
+                        <div class="step" id="step-5">
+                            <span class="step-number">5</span>
+                            <span class="step-text">Identifying language patterns</span>
+                        </div>
+                        <div class="step" id="step-6">
+                            <span class="step-number">6</span>
+                            <span class="step-text">Segmenting audio chunks</span>
+                        </div>
+                        <div class="step" id="step-7">
+                            <span class="step-number">7</span>
+                            <span class="step-text">Analyzing speech frequency</span>
+                        </div>
+                        <div class="step" id="step-8">
+                            <span class="step-number">8</span>
+                            <span class="step-text">Processing neural networks</span>
+                        </div>
+                        <div class="step" id="step-9">
+                            <span class="step-number">9</span>
+                            <span class="step-text">Transcribing audio segments</span>
+                        </div>
+                        <div class="step" id="step-10">
+                            <span class="step-number">10</span>
+                            <span class="step-text">Applying language models</span>
+                        </div>
+                        <div class="step" id="step-11">
+                            <span class="step-number">11</span>
+                            <span class="step-text">Refining text accuracy</span>
+                        </div>
+                        <div class="step" id="step-12">
+                            <span class="step-number">12</span>
+                            <span class="step-text">Synchronizing timestamps</span>
+                        </div>
+                        <div class="step" id="step-13">
+                            <span class="step-number">13</span>
+                            <span class="step-text">Optimizing word spacing</span>
+                        </div>
+                        <div class="step" id="step-14">
+                            <span class="step-number">14</span>
+                            <span class="step-text">Validating transcript quality</span>
+                        </div>
+                        <div class="step" id="step-15">
+                            <span class="step-number">15</span>
+                            <span class="step-text">Formatting output structure</span>
+                        </div>
+                        <div class="step" id="step-16">
+                            <span class="step-number">16</span>
+                            <span class="step-text">Performing final checks</span>
+                        </div>
+                        <div class="step" id="step-17">
+                            <span class="step-number">17</span>
+                            <span class="step-text">Generating download links</span>
+                        </div>
+                        <div class="step" id="step-18">
+                            <span class="step-number">18</span>
+                            <span class="step-text">Preparing response data</span>
+                        </div>
+                        <div class="step" id="step-19">
+                            <span class="step-number">19</span>
+                            <span class="step-text">Finalizing results</span>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="error-container" id="error-container" style="display: none;">
+                <h2>Error</h2>
+                <p id="error-text">Transcript not found or expired.</p>
+                <a href="index.html" class="back-button">Go Back</a>
+            </div>
+            
+            <div class="transcript-layout" id="transcript-layout" style="display: none;">
+                <!-- Column 1: YouTube Player (Retractable) -->
+                <div class="player-column" id="player-column">
+                    <div class="player-header">
+                        <h3>YouTube Player</h3>
+                        <button class="toggle-player-btn" id="toggle-player-btn" title="Toggle Player">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15,18 9,12 15,6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="player-container">
+                        <div id="youtube-player" style="width: 100%; height: 200px;">
+                        </div>
+                        <div class="video-details">
+                            <div class="video-title" id="video-title">Loading video title...</div>
+                            <div class="video-stats">
+                                <span>
+                                    <span class="label">Views:</span>
+                                    <span class="value" id="video-views">--</span>
+                                </span>
+                                <span>
+                                    <span class="label">Likes:</span>
+                                    <span class="value" id="video-likes">--</span>
+                                </span>
+                            </div>
+                            <div class="video-meta">
+                                <span>
+                                    <span class="label">Duration:</span>
+                                    <span class="value" id="video-duration">--:--</span>
+                                </span>
+                                <span>
+                                    <span class="label">Published:</span>
+                                    <span class="value" id="video-published">--</span>
+                                </span>
+                            </div>
+                            <div class="video-description-section">
+                                <div class="description-header" id="description-header">
+                                    <span>Description</span>
+                                    <button class="toggle-description-btn" id="toggle-description-btn">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="6,9 12,15 18,9"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="video-description collapsed" id="video-description">Loading description...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Transcript -->
+                <div class="transcript-column">
+                    <div class="transcript-header">
+                        <h3>Transcript Content</h3>
+                        <div class="transcript-actions">
+                            <button class="action-btn copy-btn" id="copy-transcript-btn" title="Copy transcript to clipboard">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                Copy
+                            </button>
+                            <div class="download-group">
+                                <button class="action-btn download-btn" id="download-transcript-btn" title="Download transcript">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7,10 12,15 17,10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    Download
+                                </button>
+                                <button class="download-dropdown-btn" id="download-dropdown-btn" title="Select format">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="download-dropdown-menu" id="download-dropdown-menu">
+                                    <div class="download-option" data-format="txt">
+                                        <span class="format-name">Text (.txt)</span>
+                                        <span class="format-desc">Plain text format</span>
+                                    </div>
+                                    <div class="download-option" data-format="srt">
+                                        <span class="format-name">SubRip (.srt)</span>
+                                        <span class="format-desc">Video subtitle format</span>
+                                    </div>
+                                    <div class="download-option" data-format="vtt">
+                                        <span class="format-name">WebVTT (.vtt)</span>
+                                        <span class="format-desc">Web video text tracks</span>
+                                    </div>
+                                    <div class="download-option" data-format="json">
+                                        <span class="format-name">JSON (.json)</span>
+                                        <span class="format-desc">Structured data format</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="language-group">
+                                <button class="action-btn language-btn" id="language-btn" title="Change language">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                    <span id="current-language-text">Language</span>
+                                </button>
+                                <button class="language-dropdown-btn" id="language-dropdown-btn" title="Select language">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="language-dropdown-menu" id="language-dropdown-menu">
+                                    <div class="language-option loading">Loading languages...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transcript-scroll-container">
+                        <div class="transcript-content" id="transcript-content">
+                            <!-- Transcript will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 3: AI Chat -->
+                <div class="chat-column">
+                    <div class="chat-header">
+                        <div class="chat-header-left">
+                            <h3>AI Assistant</h3>
+                            <div class="ai-model-dropdown">
+                                <button class="ai-model-dropdown-btn" id="ai-model-dropdown-btn">
+                                    <span class="model-name" id="selected-model-name">High Quality</span>
+                                    <span class="model-cost" id="selected-model-cost">(3 <img src="icons/COIN.png" class="coin-icon" alt="coin"> )</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="ai-model-dropdown-menu" id="ai-model-dropdown-menu">
+                                    <!-- Models will be populated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-info">
+                            <button class="clear-chat-btn" id="clear-chat-btn" title="Clear conversation">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                    <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chat-container" id="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="ai-message">
+                                <div class="ai-avatar">🤖</div>
+                                <div class="message-content">
+                                    <div class="message-text">Hi! I'm your AI assistant. I have access to the transcript of this video and can help answer questions about its content. What would you like to know?</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <div class="chat-input-container">
+                                <textarea id="chat-input" placeholder="Ask me anything about this video..." rows="1"></textarea>
+                                <button id="send-button" class="send-button">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                                        <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Get Transcript CTA (identical input/button behavior to index) -->
+    <div class="bottom-transcript-search" aria-label="Quick transcript search">
+        <h3 class="bottom-transcript-title">Get another transcript for Free</h3>
+        <div class="bottom-transcript-search-inner">
+            <div class="input-container">
+                <div class="input-controls">
+                    <input type="url" id="bottom-youtube-url" class="youtube-input" placeholder="Enter YouTube URL..." autocomplete="off">
+                    <button type="button" class="get-transcript-btn" id="bottom-get-transcript-btn">Get Transcript</button>
+                </div>
+                <div class="error-message" id="bottom-error-message" style="display: none;">
+                    <span class="error-text" id="bottom-error-text"></span>
+                    <button class="error-close-btn" id="bottom-error-close-btn">×</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ratings section (identical to index) -->
+    <section class="rating-section" id="ratings">
+        <h2 class="section-title">Rate YouTubeTranscriptGen.com</h2>
+        <div class="rating-card">
+            <div class="rating-layout">
+                <div class="rating-left">
+                    <div class="rating-summary">
+                        <div class="rating-stars-readonly" aria-hidden="true">
+                            <div class="stars-bg">★★★★★</div>
+                            <div class="stars-fill" id="avg-stars" style="width: 0%">★★★★★</div>
+                        </div>
+                        <div class="rating-numbers">
+                            <span class="avg" id="avg-rating">0.0</span>
+                            <span>out of 5 •</span>
+                            <span class="count"><span id="rating-count">0</span> reviews</span>
+                        </div>
+                    </div>
+                    <div class="rating-input" id="rating-input" aria-label="Your rating" role="radiogroup">
+                        <button class="star" data-value="1" aria-label="1 star" role="radio" aria-checked="false">★</button>
+                        <button class="star" data-value="2" aria-label="2 stars" role="radio" aria-checked="false">★</button>
+                        <button class="star" data-value="3" aria-label="3 stars" role="radio" aria-checked="false">★</button>
+                        <button class="star" data-value="4" aria-label="4 stars" role="radio" aria-checked="false">★</button>
+                        <button class="star" data-value="5" aria-label="5 stars" role="radio" aria-checked="false">★</button>
+                    </div>
+                    <div class="rating-status" id="rating-status" aria-live="polite"></div>
+                </div>
+                <div class="rating-right">
+                    <div class="rating-note" title="Share quick feedback after each great experience">
+                        <div class="note-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14 4 8a4 4 0 0 1 8 0"/><path d="M12 21s8-7 8-13a4 4 0 1 0-8 0"/></svg>
+                        </div>
+                        <div class="note-text">
+                            Loved it? Drop a quick rating and share it with your friends.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="scripts/ratings.js"></script>
+    <script src="scripts/burger.js"></script>
+    <script src="scripts/transcript.js"></script>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-col brand">
+                <a href="index.html" class="footer-logo">
+                    <img src="icons/logo.png" alt="Logo">
+                    <span>YouTubeTranscriptGen.com</span>
+                </a>
+                <p class="footer-tagline">Free, fast YouTube transcripts in 35+ languages.</p>
+            </div>
+            <div class="footer-col links">
+                <nav aria-label="Footer">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#faq">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+            <div class="footer-col meta">
+                <div class="location">Romania</div>
+                <div class="copyright">© 2025 YouTubeTranscriptGen.com</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pricing • YouTube Transcript Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/pricing_style.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Choose a coins pack for YouTubeTranscriptGen.com" />
+    <meta name="robots" content="noindex" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQD2M74CVJ"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-YQD2M74CVJ');
+        </script>
+</head>
+<body>
+    <div class="app">
+        <div class="navbar-container">
+            <div class="navbar">
+                <div class="navbar-left">
+                    <div class="burger-menu" role="button" id="burger-menu">
+                        <img class="burger-menu-image" src="icons/hamburger-menu.svg" alt="Menu">
+                        <div class="burger-dropdown-menu" id="burger-dropdown-menu">
+                            <a href="contact.html" class="burger-menu-item">Contact</a>
+                            <a href="pricing.html" class="burger-menu-item">Pricing</a>
+                            <a href="index.html#about" class="burger-menu-item">About Us</a>
+                            <a href="index.html#faq" class="burger-menu-item">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-mid">
+                    <a href="index.html" class="navbar-logo-title">
+                        <img src="icons/logo.png" class="navbar-logo-image" alt="Logo">
+                        <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
+                    </a>
+                </div>
+                                <div class="navbar-right">
+                                    <div class="nav-credits" title="Your coins"><span class="coin"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span> <span id="credits-amount">0</span></div>
+                                    <button class="nav-button nav-back" type="button" title="Go back">⟵ Go back</button>
+                                </div>
+            </div>
+        </div>
+
+        <main class="pricing-page">
+            <header class="pricing-header">
+                                <h1 class="title">Buy coins</h1>
+                                <p class="subtitle">Top up your account with coins and keep generating transcripts and AI answers</p>
+            </header>
+
+            <section class="pricing-grid" aria-label="Pricing options">
+                <!-- Plan 1 -->
+                <article class="plan-card" data-pack-id="starter">
+                    <header class="plan-header">
+                                                <h2 class="plan-name">Starter Pack</h2>
+                        <div class="plan-coins" data-field="coins">150 <span class="coin"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span></div>
+                    </header>
+                    <div class="plan-price">
+                        <span class="currency">$</span><span class="amount" data-field="price">5.99</span>
+                        <span class="was-price" data-field="was" style="display:none"></span>
+                        <span class="discount-badge" data-field="discount" style="display:none"></span>
+                    </div>
+                    <ul class="plan-features">
+                                                <li>Instantly get 150 coins in your account</li>
+                                                <li>Great for quick answers & short chats</li>
+                                                <li>One-time purchase — no subscription</li>
+                    </ul>
+                    <div class="plan-actions">
+                                                <button class="buy-button" data-action="buy">Buy coins</button>
+                        <div class="coming-soon" data-field="note" style="display:none">Coming soon</div>
+                    </div>
+                </article>
+
+                <!-- Plan 2 (Most Popular) -->
+                <article class="plan-card popular" data-pack-id="plus" aria-label="Most popular plan">
+                                        <div class="popular-badge">Most popular</div>
+                    <header class="plan-header">
+                                                <h2 class="plan-name">Plus Pack</h2>
+                        <div class="plan-coins" data-field="coins">300 <span class="coin"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span></div>
+                    </header>
+                    <div class="plan-price">
+                        <span class="currency">$</span><span class="amount" data-field="price">8.99</span>
+                        <span class="was-price" data-field="was" style="display:none"></span>
+                        <span class="discount-badge" data-field="discount" style="display:none"></span>
+                    </div>
+                    <ul class="plan-features">
+                                                <li>Instantly get 300 coins in your account</li>
+                                                <li>Perfect for detailed chats and answers</li>
+                                                <li>One-time purchase — no subscription</li>
+                    </ul>
+                    <div class="plan-actions">
+                                                <button class="buy-button" data-action="buy">Buy coins</button>
+                        <div class="coming-soon" data-field="note" style="display:none">Coming soon</div>
+                    </div>
+                </article>
+
+                <!-- Plan 3 -->
+                <article class="plan-card" data-pack-id="pro">
+                    <header class="plan-header">
+                                                <h2 class="plan-name">Pro Pack</h2>
+                        <div class="plan-coins" data-field="coins">500 <span class="coin"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span></div>
+                    </header>
+                    <div class="plan-price">
+                        <span class="currency">$</span><span class="amount" data-field="price">11.99</span>
+                        <span class="was-price" data-field="was" style="display:none"></span>
+                        <span class="discount-badge" data-field="discount" style="display:none"></span>
+                    </div>
+                    <ul class="plan-features">
+                                                <li>Instantly get 500 coins in your account</li>
+                                                <li>Best for long, high-quality chats</li>
+                                                <li>One-time purchase — no subscription</li>
+                    </ul>
+                    <div class="plan-actions">
+                                                <button class="buy-button" data-action="buy">Buy coins</button>
+                        <div class="coming-soon" data-field="note" style="display:none">Coming soon</div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/pricing.js"></script>
+    <script src="scripts/burger.js"></script>
+        <script>
+            // Go back behavior with solid fallback
+            (function(){
+                const backBtn = document.querySelector('.nav-back');
+                if (!backBtn) return;
+                backBtn.addEventListener('click', () => {
+                    const stored = sessionStorage.getItem('returnTo');
+                    const ref = document.referrer;
+                    const fallback = 'transcript.html';
+                    const target = stored || ref || fallback;
+                    try { window.location.href = target; } catch(_) { window.location.href = fallback; }
+                });
+            })();
+        </script>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-col brand">
+                <a href="index.html" class="footer-logo">
+                    <img src="icons/logo.png" alt="Logo">
+                    <span>YouTubeTranscriptGen.com</span>
+                </a>
+                <p class="footer-tagline">Free, fast YouTube transcripts in 35+ languages.</p>
+            </div>
+            <div class="footer-col links">
+                <nav aria-label="Footer">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#faq">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+            <div class="footer-col meta">
+                <div class="location">Romania</div>
+                <div class="copyright">© 2025 YouTubeTranscriptGen.com</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

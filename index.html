@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Transcript Generator</title>
+    <meta name="description" content="Free YouTube transcript generator. Extract and download YouTube transcripts in 100+ languages. Fast, accurate, no registration. Generate TXT, SRT, VTT, or JSON.">
+    <link rel="canonical" href="https://youtubetranscriptgen.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="YouTube Transcript Generator – Free, Fast, 100+ Languages">
+    <meta property="og:description" content="Generate YouTube transcripts instantly. Free tool supporting TXT, SRT, VTT, and JSON. Works in 100+ languages.">
+    <meta property="og:url" content="https://youtubetranscriptgen.com/">
+    <meta property="og:image" content="https://youtubetranscriptgen.com/icons/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/index_style.css">
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/logo.png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQD2M74CVJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YQD2M74CVJ');
+    </script>
+</head>
+<body>
+    <div class="app">
+        <div class="navbar-container">
+            <div class="navbar">
+                <div class="navbar-left">
+            <div class="burger-menu" role="button" id="burger-menu">
+                        <img class="burger-menu-image" src="icons/hamburger-menu.svg" alt="Menu">
+                        <div class="burger-dropdown-menu" id="burger-dropdown-menu">
+                            <a href="contact.html" class="burger-menu-item">Contact</a>
+                            <a href="pricing.html" class="burger-menu-item">Pricing</a>
+                            <a href="index.html#about" class="burger-menu-item">About Us</a>
+                            <a href="index.html#faq" class="burger-menu-item">FAQ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-mid">
+                    <a href="index.html" class="navbar-logo-title">
+                        <img src="icons/logo.png" class="navbar-logo-image" alt="Logo">
+                        <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
+                    </a>
+                </div>
+                <div class="navbar-right">
+                    <!-- Pricing Link (left of coins) -->
+                    <a href="pricing.html" class="pricing-link" title="View pricing">Pricing</a>
+
+                    <!-- Credits Display -->
+                    <!-- <div class="credits-display" id="credits-display">
+                        <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span>
+                        <span class="credits-amount" id="credits-amount">3</span>
+                    </div> -->
+
+                    <!-- Login/Profile Section -->
+                    <div class="auth-section">
+                        <!-- Login Button (when not logged in) -->
+                        <button id="login-btn" class="login-button" style="display: none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                <polyline points="10,17 15,12 10,7"/>
+                                <line x1="15" y1="12" x2="3" y2="12"/>
+                            </svg>
+                            Login
+                        </button>
+
+                        <!-- Profile Section (when logged in) -->
+                        <div id="profile-section" class="profile-section" style="display: none;">
+                            <div class="profile-container">
+                                <img id="profile-picture" class="profile-picture" src="" alt="Profile">
+                                <div class="profile-dropdown" id="profile-dropdown">
+                                    <div class="profile-info">
+                                        <div class="profile-text">
+                                            <div class="profile-name" id="profile-name">Loading...</div>
+                                            <div class="profile-email" id="profile-email">Loading...</div>
+                                        </div>
+                                        <div class="profile-credits-pill" id="profile-credits-pill" title="Your coins">
+                                            <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span>
+                                            <span class="credits-amount" id="credits-amount-profile">0</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Conversation History Section -->
+                                    <div class="conversation-history-section" id="conversation-history-section">
+                                        <div class="history-header">
+                                            <span class="history-title">💬 Conversation History</span>
+                                            <button class="clear-all-btn" id="clear-all-conversations" title="Clear all conversations">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3,6 5,6 21,6"></polyline>
+                                                    <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div class="conversation-list" id="conversation-list">
+                                            <div class="loading-conversations">Loading conversations...</div>
+                                        </div>
+                                        <div class="show-all-container" id="show-all-container" style="display: none;">
+                                            <button class="show-all-btn" id="show-all-conversations">Show All</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="profile-actions">
+                                        <button id="logout-btn" class="logout-button">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                                <polyline points="16,17 21,12 16,7"/>
+                                                <line x1="21" y1="12" x2="9" y2="12"/>
+                                            </svg>
+                                            Logout
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="main-header">
+            <div class="header-upper">
+                <h1 class="header-title">
+                    YouTube Transcript Generator
+                </h1>
+            </div>
+            <div class="header-middle">
+                <div class="header-middle-inner-1">
+                    <div class="header-middle-inner-2">
+                        <div class="main-container-area">
+                           <div class="main-area-inner-box">
+                            <div class="input-container">
+                                <p class="main-container-area-elements-text-above">Generate YouTube transcripts in any language.<br>Free, fast, and easy to use.</p>
+                                <div class="input-controls">
+                                    <input type="url" id="youtube-url" class="youtube-input" placeholder="Enter YouTube URL...">
+                                    <button type="button" class="get-transcript-btn" id="get-transcript-btn">Get Transcript</button>
+                                </div>
+                                <div class="error-message" id="error-message" style="display: none;">
+                                    <span class="error-text" id="error-text"></span>
+                                    <button class="error-close-btn" id="error-close-btn">×</button>
+                                </div>
+                            </div>
+                           </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-lower">
+                <div class="features-container">
+                    <div class="features-column">
+                        <div class="feature-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m-1.591-6.85 5.728-5.727a.9.9 0 0 1 1.272 1.272l-6.293 6.294a1 1 0 0 1-1.414 0L6.59 12.877a.9.9 0 0 1 1.272-1.272z"/>
+                            </svg>
+                            <span>100% FREE To Use</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m-1.591-6.85 5.728-5.727a.9.9 0 0 1 1.272 1.272l-6.293 6.294a1 1 0 0 1-1.414 0L6.59 12.877a.9.9 0 0 1 1.272-1.272z"/>
+                            </svg>
+                            <span>Unlimited Nr. of Transcripts</span>
+                        </div>
+                    </div>
+                    <div class="features-column">
+                        <div class="feature-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m-1.591-6.85 5.728-5.727a.9.9 0 0 1 1.272 1.272l-6.293 6.294a1 1 0 0 1-1.414 0L6.59 12.877a.9.9 0 0 1 1.272-1.272z"/>
+                            </svg>
+                            <span>100+ Languages Supported</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m-1.591-6.85 5.728-5.727a.9.9 0 0 1 1.272 1.272l-6.293 6.294a1 1 0 0 1-1.414 0L6.59 12.877a.9.9 0 0 1 1.272-1.272z"/>
+                            </svg>
+                            <span>High Accuracy Transcripts</span>
+                        </div>
+                    </div>
+                    <div class="features-column">
+                        <div class="feature-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m-1.591-6.85 5.728-5.727a.9.9 0 0 1 1.272 1.272l-6.293 6.294a1 1 0 0 1-1.414 0L6.59 12.877a.9.9 0 0 1 1.272-1.272z"/>
+                            </svg>
+                            <span>No Registration Required</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18m-1.591-6.85 5.728-5.727a.9.9 0 0 1 1.272 1.272l-6.293 6.294a1 1 0 0 1-1.414 0L6.59 12.877a.9.9 0 0 1 1.272-1.272z"/>
+                            </svg>
+                            <span>Easy Copy & Download</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    <!-- Bottom sections (placed below the fold) -->
+    <div class="index-bottom" aria-label="More information">
+            <!-- Ratings -->
+            <section class="rating-section" id="ratings">
+                <h2 class="section-title">Rate YouTubeTranscriptGen.com</h2>
+                <div class="rating-card">
+                    <div class="rating-layout">
+                        <div class="rating-left">
+                            <div class="rating-summary">
+                                <div class="rating-stars-readonly" aria-hidden="true">
+                                    <div class="stars-bg">★★★★★</div>
+                                    <div class="stars-fill" id="avg-stars" style="width: 0%">★★★★★</div>
+                                </div>
+                                <div class="rating-numbers">
+                                    <span class="avg" id="avg-rating">0.0</span>
+                                    <span>out of 5 •</span>
+                                    <span class="count"><span id="rating-count">0</span> reviews</span>
+                                </div>
+                            </div>
+                            <div class="rating-input" id="rating-input" aria-label="Your rating" role="radiogroup">
+                                <button class="star" data-value="1" aria-label="1 star" role="radio" aria-checked="false">★</button>
+                                <button class="star" data-value="2" aria-label="2 stars" role="radio" aria-checked="false">★</button>
+                                <button class="star" data-value="3" aria-label="3 stars" role="radio" aria-checked="false">★</button>
+                                <button class="star" data-value="4" aria-label="4 stars" role="radio" aria-checked="false">★</button>
+                                <button class="star" data-value="5" aria-label="5 stars" role="radio" aria-checked="false">★</button>
+                            </div>
+                            <div class="rating-status" id="rating-status" aria-live="polite"></div>
+                        </div>
+                        <div class="rating-right">
+                            <div class="rating-note" title="Share quick feedback after each great experience">
+                                <div class="note-icon" aria-hidden="true">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 14 4 8a4 4 0 0 1 8 0"/><path d="M12 21s8-7 8-13a4 4 0 1 0-8 0"/></svg>
+                                </div>
+                                <div class="note-text">
+                                    Loved it? Drop a quick rating and Share it with your friends.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About (band, no white box) -->
+            <section class="about-section" id="about">
+                <h2 class="section-title">What is YouTube Transcript Generator?</h2>
+                <div class="about-band">
+                    <div class="about-grid">
+                        <div class="about-left">
+                            <p class="lead">
+                                Short on time? This YouTube transcript generator turns any public video into a clean, searchable transcript — fast.
+                            </p>
+                            <div class="about-narrative">
+                                <p>
+                                    Paste a link and get a precise <strong>YouTube transcript</strong> in <strong>all Languages</strong> available for that video. Need to <strong>download a YouTube transcript</strong>? Export to <strong>TXT</strong>, <strong>SRT</strong>, <strong>VTT</strong>, or <strong>JSON</strong> in one click.
+                                </p>
+                                <p>
+                                    It’s free, fast, and supports <strong>100+ languages</strong>. No sign‑up. No fluff. Just a reliable <strong>YouTube transcript generator</strong> that works the way you expect — every time.
+                                </p>
+                                <p>
+                                    Perfect for students, researchers, journalists, creators, and teams who need accurate <strong>YouTube transcripts</strong> for notes, quotes, <strong>SEO</strong>, accessibility, or content repurposing. If you’re searching for the best <strong>YouTube transcript</strong> tool — you’re in the right place.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="about-right">
+                            <ul class="highlight-list">
+                                <li>
+                                    <span class="chip">
+                                        <svg class="icon-14" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                                        Rapid transcript generation
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="chip">
+                                        <svg class="icon-14" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg>
+                                    100+ languages supported
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="chip">
+                                        <svg class="icon-14" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        Download: TXT · SRT · VTT · JSON
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="chip">
+                                        <svg class="icon-14" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                        Great for SEO & research
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Who is it for / use cases (band) -->
+            <section class="use-cases-section">
+                <h2 class="section-title">Who is it for?</h2>
+                <div class="use-band">
+                    <div class="use-grid">
+                        <div class="use-item">
+                            <div class="icon-bubble" aria-hidden="true">
+                                <svg class="icon-18" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V4a2 2 0 0 1 2-2h8l6 6v11.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg>
+                            </div>
+                            <div class="use-text">Students and researchers who need accurate <strong>YouTube transcripts</strong> for quotes, references, and study notes.</div>
+                        </div>
+                        <div class="use-item">
+                            <div class="icon-bubble" aria-hidden="true">
+                                <svg class="icon-18" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                            </div>
+                            <div class="use-text">Creators and marketers repurposing videos into articles, social posts, newsletters, and SEO‑friendly content.</div>
+                        </div>
+                        <div class="use-item">
+                            <div class="icon-bubble" aria-hidden="true">
+                                <svg class="icon-18" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+                            </div>
+                            <div class="use-text">Journalists and analysts summarizing interviews, podcasts, and long‑form discussions — faster than real time.</div>
+                        </div>
+                        <div class="use-item">
+                            <div class="icon-bubble" aria-hidden="true">
+                                <svg class="icon-18" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg>
+                            </div>
+                            <div class="use-text">Language learners practicing listening + reading in 100+ languages with a searchable transcript.</div>
+                        </div>
+                        <div class="use-item">
+                            <div class="icon-bubble" aria-hidden="true">
+                                <svg class="icon-18" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 8 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 3.6 15a1.65 1.65 0 0 0-1.51-1H2a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 3.6 8a1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 6.04 3.3l.06.06A1.65 1.65 0 0 0 7.92 3a1.65 1.65 0 0 0 1-1.51V1a2 2 0 1 1 4 0v.09A1.65 1.65 0 0 0 14 3.6c.48.2 1 .2 1.48 0l.06-.06A2 2 0 1 1 18.7 6.04l-.06.06A1.65 1.65 0 0 0 19 7.92c0 .38.13.74.35 1.04.22.3.53.54.89.65H21a2 2 0 1 1 0 4h-.09c-.36.11-.67.35-.89.65-.22.3-.35.66-.35 1.04z"/></svg>
+                            </div>
+                            <div class="use-text">Anyone who wants a simple, reliable <em>YouTube transcript generator</em> that just works.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="faq-section" id="faq">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-band">
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false"><span class="q-left"><svg class="q-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1l3 5 5 .5-3.5 4 1 5-5-2.5L7 16.5l1-5L4.5 6.5 10 6z"/></svg><span class="q-text">Is YouTube Transcript Generator free?</span></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></button>
+                        <div class="faq-answer" hidden>
+                            Yes. You can generate transcripts for free. Optional AI chat and premium features may use coins for enhanced functionality.
+                        </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false"><span class="q-left"><svg class="q-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="q-text">Which formats can I download?</span></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></button>
+                        <div class="faq-answer" hidden>
+                            You can download transcripts as plain text (TXT), SubRip (SRT), WebVTT (VTT), or JSON for structured data.
+                        </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false"><span class="q-left"><svg class="q-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/></svg><span class="q-text">Does it support multiple languages?</span></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></button>
+                        <div class="faq-answer" hidden>
+                            Yes, 100+ languages. If a video has auto‑captions, we’ll fetch and format them for you.
+                        </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question" aria-expanded="false"><span class="q-left"><svg class="q-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 15 12"/></svg><span class="q-text">Will it work on any YouTube video?</span></span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></button>
+                        <div class="faq-answer" hidden>
+                            It works on most public videos that have captions available. Private videos and some restricted content may not allow transcript extraction.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ structured data for rich results -->
+            <script type="application/ld+json" id="faq-ld-json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Is YouTube Transcript Generator free?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can generate transcripts for free. Optional AI chat and premium features may use coins for enhanced functionality."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Which formats can I download?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "You can download transcripts as plain text (TXT), SubRip (SRT), WebVTT (VTT), or JSON for structured data."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Does it support multiple languages?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "Yes, 100+ languages. If a video has auto‑captions, we’ll fetch and format them for you."}
+                },
+                {
+                  "@type": "Question",
+                  "name": "Will it work on any YouTube video?",
+                  "acceptedAnswer": {"@type": "Answer", "text": "It works on most public videos that have captions available. Private videos and some restricted content may not allow transcript extraction."}
+                }
+              ]
+            }
+            </script>
+            <!-- Aggregate rating JSON-LD will be injected dynamically -->
+        </div>
+    </div>
+    <script src="scripts/ratings.js"></script>
+    <script src="scripts/burger.js"></script>
+    <script src="scripts/main.js"></script>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-col brand">
+                <a href="index.html" class="footer-logo">
+                    <img src="icons/logo.png" alt="Logo">
+                    <span>YouTubeTranscriptGen.com</span>
+                </a>
+                <p class="footer-tagline">Free, fast YouTube transcripts in 100+ languages.</p>
+            </div>
+            <div class="footer-col links">
+                <nav aria-label="Footer">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#faq">FAQ</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+            <div class="footer-col meta">
+                <div class="location">Romania</div>
+                <div class="copyright">© 2025 YouTubeTranscriptGen.com</div>
+            </div>
+        </div>
+    </footer>
+</body>
