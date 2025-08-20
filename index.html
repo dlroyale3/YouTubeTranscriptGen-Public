@@ -52,7 +52,40 @@
             "priceCurrency": "USD",
             "availability": "https://schema.org/InStock",
             "url": "https://youtubetranscriptgen.com/pricing.html",
-            "description": "Free credits for all users. Paid plans via Stripe for advanced AI and more transcripts."
+            "description": "Free credits for all users. Paid plans via Stripe for advanced AI and more transcripts.",
+                    "priceValidUntil": "2026-12-31",
+                    "shippingDetails": {
+                        "@type": "OfferShippingDetails",
+                        "shippingRate": {
+                            "@type": "MonetaryAmount",
+                            "value": "0",
+                            "currency": "USD"
+                        },
+                        "shippingDestination": {
+                            "@type": "DefinedRegion",
+                            "name": "Worldwide"
+                        },
+                        "deliveryTime": {
+                            "@type": "ShippingDeliveryTime",
+                            "handlingTime": {
+                                "@type": "QuantitativeValue",
+                                "value": 0,
+                                "unitCode": "DAY"
+                            },
+                            "transitTime": {
+                                "@type": "QuantitativeValue",
+                                "value": 0,
+                                "unitCode": "DAY"
+                            }
+                        }
+                    },
+                    "hasMerchantReturnPolicy": {
+                        "@type": "MerchantReturnPolicy",
+                        "returnPolicyCategory": "https://schema.org/NoReturns",
+                        "merchantReturnDays": 0,
+                        "returnMethod": "https://schema.org/DigitalDelivery",
+                        "returnFees": "https://schema.org/FreeReturn"
+                    }
         },
         "aggregateRating": {
             "@type": "AggregateRating",
