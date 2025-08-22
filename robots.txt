@@ -1,0 +1,11 @@
+# robots.txt for YouTubeTranscriptGen.com
+User-agent: *
+Allow: /
+
+# Allow crawling of all resources (CSS, JS, images, fonts)
+Allow: /icons/
+Allow: /style/
+Allow: /scripts/
+
+# Sitemap location
+Sitemap: https://youtubetranscriptgen.com/sitemap.xml
