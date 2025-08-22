@@ -63,17 +63,22 @@
                         },
                         "shippingDestination": {
                             "@type": "DefinedRegion",
-                            "name": "Worldwide"
+                            "name": "Worldwide",
+                            "addressCountry": "Worldwide"
                         },
                         "deliveryTime": {
                             "@type": "ShippingDeliveryTime",
                             "handlingTime": {
                                 "@type": "QuantitativeValue",
+                                "minValue": 0,
+                                "maxValue": 0,
                                 "value": 0,
                                 "unitCode": "DAY"
                             },
                             "transitTime": {
                                 "@type": "QuantitativeValue",
+                                "minValue": 0,
+                                "maxValue": 0,
                                 "value": 0,
                                 "unitCode": "DAY"
                             }
@@ -84,7 +89,8 @@
                         "returnPolicyCategory": "https://schema.org/NoReturns",
                         "merchantReturnDays": 0,
                         "returnMethod": "https://schema.org/DigitalDelivery",
-                        "returnFees": "https://schema.org/FreeReturn"
+                        "returnFees": "https://schema.org/FreeReturn",
+                        "applicableCountry": "Worldwide"
                     }
         },
         "aggregateRating": {
