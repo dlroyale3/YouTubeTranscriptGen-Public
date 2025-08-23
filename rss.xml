@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>YouTube Transcript Generator Updates</title>
+    <link>https://youtubetranscriptgen.com/</link>
+    <description>Latest updates, features, and news from YouTubeTranscriptGen.com</description>
+    <item>
+      <title>Welcome to YouTube Transcript Generator</title>
+      <link>https://youtubetranscriptgen.com/</link>
+      <description>Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON.</description>
+      <pubDate>2025-08-23</pubDate>
+    </item>
+  </channel>
+</rss>

@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
     <link rel="alternate" hreflang="en-us" href="https://youtubetranscriptgen.com/" />
     <title>YouTube Transcript Generator | AI Chat, Multi-language, Download & Rating</title>
     <meta name="description" content="Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Best for US creators, marketers, and students. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON. Fast, accurate, no registration required.">
@@ -21,80 +24,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/index_style.css">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/logo.png">
-    <!-- Schema.org JSON-LD for WebSite, Product, Offer, AggregateRating -->
+    <link rel="icon" href="/icons/logo.ico">
+    <link rel="shortcut icon" href="/icons/logo.ico">
+    <link rel="apple-touch-icon" href="/icons/logo.png">
+    <!-- Schema.org JSON-LD for Organization, BreadcrumbList, AggregateRating -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebSite",
+        "@type": "Organization",
         "name": "YouTubeTranscriptGen.com",
         "url": "https://youtubetranscriptgen.com/",
-        "description": "Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON.",
-        "publisher": {
-            "@type": "Organization",
-            "name": "YouTubeTranscriptGen.com",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://youtubetranscriptgen.com/icons/logo.png"
-            }
-        }
+        "logo": "https://youtubetranscriptgen.com/icons/logo.png",
+        "contactPoint": [{
+            "@type": "ContactPoint",
+            "email": "dumluca4@gmail.com",
+            "contactType": "customer support",
+            "areaServed": "US"
+        }]
     }
     </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "YouTube Transcript Generator",
-        "image": "https://youtubetranscriptgen.com/icons/logo.png",
-        "description": "Generate YouTube transcripts, chat with AI, download in TXT, SRT, VTT, JSON. Supports 100+ languages, Stripe payments, free credits, and user ratings.",
-        "brand": "YouTubeTranscriptGen.com",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "availability": "https://schema.org/InStock",
-            "url": "https://youtubetranscriptgen.com/pricing.html",
-            "description": "Free credits for all users. Paid plans via Stripe for advanced AI and more transcripts.",
-                    "priceValidUntil": "2026-12-31",
-                    "shippingDetails": {
-                        "@type": "OfferShippingDetails",
-                        "shippingRate": {
-                            "@type": "MonetaryAmount",
-                            "value": "0",
-                            "currency": "USD"
-                        },
-                        "shippingDestination": {
-                            "@type": "DefinedRegion",
-                            "addressCountry": "US"
-                        },
-                        "deliveryTime": {
-                            "@type": "ShippingDeliveryTime",
-                            "handlingTime": {
-                                "@type": "QuantitativeValue",
-                                "minValue": 0,
-                                "maxValue": 0,
-                                "value": 0,
-                                "unitCode": "DAY"
-                            },
-                            "transitTime": {
-                                "@type": "QuantitativeValue",
-                                "minValue": 0,
-                                "maxValue": 0,
-                                "value": 0,
-                                "unitCode": "DAY"
-                            }
-                        }
-                    },
-                    "hasMerchantReturnPolicy": {
-                        "@type": "MerchantReturnPolicy",
-                        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                        "applicableCountry": "US"
-                    }
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://youtubetranscriptgen.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://youtubetranscriptgen.com/pricing.html"},
+            {"@type": "ListItem", "position": 3, "name": "Transcript", "item": "https://youtubetranscriptgen.com/transcript.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AggregateRating",
+        "itemReviewed": {
+            "@type": "WebSite",
+            "name": "YouTubeTranscriptGen.com"
         },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "1200"
-        }
+        "ratingValue": "4.9",
+        "reviewCount": "1200"
     }
     </script>
     <!-- Google tag (gtag.js) -->
@@ -105,6 +74,7 @@
             gtag('js', new Date());
             gtag('config', 'G-YQD2M74CVJ');
     </script>
+    <link rel="alternate" type="application/rss+xml" href="https://youtubetranscriptgen.com/rss.xml">
 </head>
 <body>
     <div class="app">
@@ -112,7 +82,7 @@
             <div class="navbar">
                 <div class="navbar-left">
             <div class="burger-menu" role="button" id="burger-menu">
-                        <img class="burger-menu-image" src="icons/hamburger-menu.svg" alt="Menu">
+                        <img class="burger-menu-image" src="icons/hamburger-menu.svg" alt="Open navigation menu">
                         <div class="burger-dropdown-menu" id="burger-dropdown-menu">
                             <a href="contact.html" class="burger-menu-item">Contact</a>
                             <a href="pricing.html" class="burger-menu-item">Pricing</a>
@@ -123,7 +93,7 @@
                 </div>
                 <div class="navbar-mid">
                     <a href="index.html" class="navbar-logo-title">
-                        <img src="icons/logo.png" class="navbar-logo-image" alt="Logo">
+                        <img src="icons/logo.png" class="navbar-logo-image" alt="YouTube Transcript Generator Logo">
                         <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
                     </a>
                 </div>
@@ -160,7 +130,7 @@
                                             <div class="profile-email" id="profile-email">Loading...</div>
                                         </div>
                                         <div class="profile-credits-pill" id="profile-credits-pill" title="Your coins">
-                                            <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="coin"></span>
+                                            <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="Coin icon for credits"></span>
                                             <span class="credits-amount" id="credits-amount-profile">0</span>
                                         </div>
                                     </div>
@@ -498,7 +468,7 @@
         <div class="footer-inner">
             <div class="footer-col brand">
                 <a href="index.html" class="footer-logo">
-                    <img src="icons/logo.png" alt="Logo">
+                    <img src="icons/logo.png" alt="YouTube Transcript Generator Logo">
                     <span>YouTubeTranscriptGen.com</span>
                 </a>
                 <p class="footer-tagline">Free, fast YouTube transcripts in 100+ languages.</p>
@@ -511,9 +481,29 @@
                 </nav>
             </div>
             <div class="footer-col meta">
-                <div class="location">Romania</div>
+                <div class="location">United States</div>
                 <div class="copyright">© 2025 YouTubeTranscriptGen.com</div>
             </div>
         </div>
     </footer>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "YouTube Transcript Generator",
+      "operatingSystem": "Web, Android, iOS",
+      "applicationCategory": "UtilitiesApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 4.9,
+        "ratingCount": 1200
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": 0,
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
 </body>
+</html>
