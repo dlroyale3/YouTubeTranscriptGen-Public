@@ -22,10 +22,15 @@
     <meta name="twitter:description" content="Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON.">
     <meta name="twitter:image" content="https://youtubetranscriptgen.com/icons/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/index_style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" href="style/index_style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style/index_style.css"></noscript>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48">
+    <link rel="shortcut icon" href="/favicon.ico" sizes="48x48">
+    <meta name="theme-color" content="#ffffff">
     <link rel="icon" type="image/png" sizes="192x192" href="icons/logo.png">
     <link rel="icon" href="/icons/logo.ico">
-    <link rel="shortcut icon" href="/icons/logo.ico">
     <link rel="apple-touch-icon" href="/icons/logo.png">
     <!-- Schema.org JSON-LD for Organization, BreadcrumbList, AggregateRating -->
     <script type="application/ld+json">
@@ -35,12 +40,25 @@
         "name": "YouTubeTranscriptGen.com",
         "url": "https://youtubetranscriptgen.com/",
         "logo": "https://youtubetranscriptgen.com/icons/logo.png",
+        "image": "https://youtubetranscriptgen.com/icons/logo.png",
         "contactPoint": [{
             "@type": "ContactPoint",
             "email": "dumluca4@gmail.com",
             "contactType": "customer support",
             "areaServed": "US"
         }]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://youtubetranscriptgen.com/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://youtubetranscriptgen.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
     }
     </script>
     <script type="application/ld+json">
@@ -102,7 +120,7 @@
                 </div>
                 <div class="navbar-mid">
                     <a href="index.html" class="navbar-logo-title">
-                        <img src="icons/logo.png" class="navbar-logo-image" alt="YouTube Transcript Generator Logo">
+                        <img src="icons/logo.png" class="navbar-logo-image" alt="YouTube Transcript Generator Logo" width="48" height="48" loading="lazy">
                         <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
                     </a>
                 </div>
@@ -139,7 +157,7 @@
                                             <div class="profile-email" id="profile-email">Loading...</div>
                                         </div>
                                         <div class="profile-credits-pill" id="profile-credits-pill" title="Your coins">
-                                            <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="Coin icon for credits"></span>
+                                            <span class="credits-icon"><img src="icons/COIN.png" class="coin-icon" alt="Coin icon for credits" width="20" height="20" loading="lazy"></span>
                                             <span class="credits-amount" id="credits-amount-profile">0</span>
                                         </div>
                                     </div>
@@ -476,8 +494,8 @@
     <footer class="site-footer" role="contentinfo">
         <div class="footer-inner">
             <div class="footer-col brand">
-                <a href="index.html" class="footer-logo">
-                    <img src="icons/logo.png" alt="YouTube Transcript Generator Logo">
+                    <a href="index.html" class="footer-logo">
+                    <img src="icons/logo.png" alt="YouTube Transcript Generator Logo" width="48" height="48" loading="lazy">
                     <span>YouTubeTranscriptGen.com</span>
                 </a>
                 <p class="footer-tagline">Free, fast YouTube transcripts in 100+ languages.</p>

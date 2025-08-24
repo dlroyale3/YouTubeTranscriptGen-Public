@@ -6,6 +6,7 @@ Allow: /
 Allow: /icons/
 Allow: /style/
 Allow: /scripts/
+Allow: /favicon.ico
 
 # Sitemap location
 Sitemap: https://youtubetranscriptgen.com/sitemap.xml
