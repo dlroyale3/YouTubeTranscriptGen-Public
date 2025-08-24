@@ -177,6 +177,20 @@
         </div>
         
         <div class="main-content">
+            <!-- Static, crawlable intro to avoid soft-404 when JS-driven content is empty -->
+            <main class="page-intro" aria-label="Transcript page introduction">
+                <h1>YouTube Transcript Generator — Transcript Viewer</h1>
+                <p>
+                    Use this page to view and download transcripts for public YouTube videos. Paste a YouTube URL or a video ID into the input on the homepage and we will fetch and display the transcript here. Supported exports: TXT, SRT, VTT, JSON. Compatible with 100+ languages.
+                </p>
+                <p>
+                    If you landed here without a specific video, go to the homepage to enter a YouTube link: <a href="/">YouTubeTranscriptGen.com</a>.
+                </p>
+                <noscript>
+                    <p><strong>Note:</strong> JavaScript is required to fetch and display transcripts on this site. Please enable JavaScript or visit the <a href="/">homepage</a> to paste a YouTube link.</p>
+                </noscript>
+            </main>
+
             <div class="loading-container" id="loading-container">
                 <div class="loading-content">
                     <div class="spinner"></div>
