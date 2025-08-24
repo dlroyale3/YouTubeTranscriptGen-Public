@@ -1,26 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="geo.region" content="US" />
     <meta name="geo.placename" content="United States" />
     <link rel="alternate" hreflang="en-us" href="https://youtubetranscriptgen.com/" />
-    <title>YouTube Transcript Generator | Free AI Chat, Multi-language, Download & Rating</title>
-    <meta name="description" content="Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Best for US creators, marketers, and students. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON. Fast, accurate, no registration required.">
+    <title>YouTube Transcript Generator — Free AI Chat & Download</title>
+    <meta name="description" content="Generate and download YouTube transcripts in 100+ languages. Free, no registration, AI chat, export SRT/VTT/TXT/JSON — fast and accurate for creators and students.">
+    <meta name="application-name" content="YouTube Transcript Generator">
+    <meta name="apple-mobile-web-app-title" content="YouTube Transcript Generator">
     <meta name="keywords" content="YouTube transcript generator, AI transcript, YouTube captions, download transcript, multi-language transcript, SRT, VTT, TXT, JSON, YouTube AI chat, Stripe payment, free credits, rating, SEO, accessibility, export transcript, United States, US, American creators, English transcript">
     <meta name="robots" content="index, follow">
     <meta name="author" content="YouTubeTranscriptGen.com">
     <link rel="canonical" href="https://youtubetranscriptgen.com/">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="YouTube Transcript Generator">
     <meta property="og:title" content="YouTube Transcript Generator – AI Chat, Multi-language, Download & Rating">
     <meta property="og:description" content="Generate YouTube transcripts instantly, chat with AI, download in multiple formats, rate and pay with Stripe. Free credits for all users.">
     <meta property="og:url" content="https://youtubetranscriptgen.com/">
     <meta property="og:image" content="https://youtubetranscriptgen.com/icons/logo.png">
+    <meta property="og:image:alt" content="YouTube Transcript Generator logo">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="YouTube Transcript Generator – AI Chat, Multi-language, Download & Rating">
     <meta name="twitter:description" content="Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON.">
     <meta name="twitter:image" content="https://youtubetranscriptgen.com/icons/logo.png">
+    <!-- Favicons adapted to existing files (avoid 404s) -->
+    <!-- Using existing icon files from /icons/ to ensure resources exist on disk -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/logo.png">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- Help crawlers find the main site image quickly -->
+    <link rel="image_src" href="https://youtubetranscriptgen.com/icons/logo.png">
+    <link rel="preload" as="image" href="https://youtubetranscriptgen.com/icons/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,8 +80,9 @@
         "@type": "SoftwareApplication",
         "name": "YouTube Transcript Generator",
         "url": "https://youtubetranscriptgen.com/",
-        "operatingSystem": "Web, Android, iOS",
-        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem":"Windows, Mac, Chrome, Microsoft Edge, Safari, Android, iOS",
+        "applicationCategory":"WebApplication",
+        "isAccessibleForFree": "true",
         "offers": {
             "@type": "Offer",
             "price": 0,
@@ -80,6 +95,53 @@
         }
     }
     </script>
+
+    <!-- FAQ structured data for rich results -->
+    <script type="application/ld+json" id="faq-ld-json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is YouTube Transcript Generator free?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can generate transcripts for free. Optional AI chat and premium features may use coins for enhanced functionality. Every logged-in user gets 15 free credits, and non-logged users get 3 credits."}
+            },
+            {
+                "@type": "Question",
+                "name": "Which formats can I download?",
+                "acceptedAnswer": {"@type": "Answer", "text": "You can download transcripts as plain text (TXT), SubRip (SRT), WebVTT (VTT), or JSON for structured data. You can also copy the transcript in full or in parts."}
+            },
+            {
+                "@type": "Question",
+                "name": "Does it support multiple languages?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Yes, 100+ languages. The transcript is generated in the video's default language, but you can change it to another supported language."}
+            },
+            {
+                "@type": "Question",
+                "name": "Will it work on any YouTube video?",
+                "acceptedAnswer": {"@type": "Answer", "text": "It works on most public videos that have captions available. Private videos and some restricted content may not allow transcript extraction."}
+            },
+            {
+                "@type": "Question",
+                "name": "Can I chat with AI about the video?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Yes, you can chat with an AI that has received the transcript context. There are multiple AI power levels: medium, high, and ultra high."}
+            },
+            {
+                "@type": "Question",
+                "name": "How does the rating system work?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Each user can leave a single star rating (1-5) for the site. Aggregate ratings are displayed on the homepage."}
+            },
+            {
+                "@type": "Question",
+                "name": "How do payments work?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Payments are processed securely via Stripe. Free credits are available for all users, and paid plans unlock advanced AI and more transcripts."}
+            }
+        ]
+    }
+    </script>
+    <!-- Aggregate rating JSON-LD will be injected dynamically -->
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQD2M74CVJ"></script>
     <script>
@@ -427,51 +489,7 @@
                 </div>
             </section>
 
-            <!-- FAQ structured data for rich results -->
-                        <script type="application/ld+json" id="faq-ld-json">
-                        {
-                            "@context": "https://schema.org",
-                            "@type": "FAQPage",
-                            "mainEntity": [
-                                {
-                                    "@type": "Question",
-                                    "name": "Is YouTube Transcript Generator free?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "Yes. You can generate transcripts for free. Optional AI chat and premium features may use coins for enhanced functionality. Every logged-in user gets 15 free credits, and non-logged users get 3 credits."}
-                                },
-                                {
-                                    "@type": "Question",
-                                    "name": "Which formats can I download?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "You can download transcripts as plain text (TXT), SubRip (SRT), WebVTT (VTT), or JSON for structured data. You can also copy the transcript in full or in parts."}
-                                },
-                                {
-                                    "@type": "Question",
-                                    "name": "Does it support multiple languages?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "Yes, 100+ languages. The transcript is generated in the video's default language, but you can change it to another supported language."}
-                                },
-                                {
-                                    "@type": "Question",
-                                    "name": "Will it work on any YouTube video?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "It works on most public videos that have captions available. Private videos and some restricted content may not allow transcript extraction."}
-                                },
-                                {
-                                    "@type": "Question",
-                                    "name": "Can I chat with AI about the video?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "Yes, you can chat with an AI that has received the transcript context. There are multiple AI power levels: medium, high, and ultra high."}
-                                },
-                                {
-                                    "@type": "Question",
-                                    "name": "How does the rating system work?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "Each user can leave a single star rating (1-5) for the site. Aggregate ratings are displayed on the homepage."}
-                                },
-                                {
-                                    "@type": "Question",
-                                    "name": "How do payments work?",
-                                    "acceptedAnswer": {"@type": "Answer", "text": "Payments are processed securely via Stripe. Free credits are available for all users, and paid plans unlock advanced AI and more transcripts."}
-                                }
-                            ]
-                        }
-                        </script>
-            <!-- Aggregate rating JSON-LD will be injected dynamically -->
+            
         </div>
     </div>
     <script src="scripts/ratings.js"></script>
