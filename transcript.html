@@ -91,13 +91,13 @@
                         <div class="burger-dropdown-menu" id="burger-dropdown-menu">
                             <a href="contact.html" class="burger-menu-item">Contact</a>
                             <a href="pricing.html" class="burger-menu-item">Pricing</a>
-                            <a href="index.html#about" class="burger-menu-item">About Us</a>
-                            <a href="index.html#faq" class="burger-menu-item">FAQ</a>
+                            <a class="burger-menu-item home-fragment" data-fragment="#about">About Us</a>
+                            <a class="burger-menu-item home-fragment" data-fragment="#faq">FAQ</a>
                         </div>
                     </div>
                 </div>
                 <div class="navbar-mid">
-                    <a href="index.html" class="navbar-logo-title">
+                    <a href="#" class="navbar-logo-title home-link">
                         <img src="icons/logo.png" class="navbar-logo-image" alt="YouTube Transcript Generator Logo">
                         <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
                     </a>
@@ -268,7 +268,7 @@
             <div class="error-container" id="error-container" style="display: none;">
                 <h2>Error</h2>
                 <p id="error-text">Transcript not found or expired.</p>
-                <a href="index.html" class="back-button">Go Back</a>
+                <a href="#" class="back-button home-link">Go Back</a>
             </div>
             
             <div class="transcript-layout" id="transcript-layout" style="display: none;">
@@ -508,11 +508,36 @@
     <script src="scripts/ratings.js"></script>
     <script src="scripts/burger.js"></script>
     <script src="scripts/transcript.js"></script>
+    <script>
+    (function(){
+        const isDev = location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.port === '5501' || location.port === '5500';
+        const homeHref = isDev ? 'index.html' : '/';
+        document.querySelectorAll('.home-link').forEach(el=> el.setAttribute('href', homeHref));
+        document.querySelectorAll('.home-fragment').forEach(el=> {
+            const frag = el.getAttribute('data-fragment') || '';
+            el.setAttribute('href', homeHref + (frag || ''));
+        });
+    })();
+    </script>
+
+    <script>
+    // Environment-aware home/fragment links:
+    (function(){
+        const isDev = location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.port === '5501' || location.port === '5500';
+        const homeHref = isDev ? 'index.html' : '/';
+        document.querySelectorAll('.home-link').forEach(el=> el.setAttribute('href', homeHref));
+        document.querySelectorAll('.home-fragment').forEach(el=> {
+            const frag = el.getAttribute('data-fragment') || '';
+            // In dev point to index.html#fragment, in prod to /#fragment
+            el.setAttribute('href', homeHref + (frag || ''));
+        });
+    })();
+    </script>
 
     <footer class="site-footer" role="contentinfo">
         <div class="footer-inner">
             <div class="footer-col brand">
-                <a href="index.html" class="footer-logo">
+                <a href="#" class="footer-logo home-link">
                     <img src="icons/logo.png" alt="Logo">
                     <span>YouTubeTranscriptGen.com</span>
                 </a>
@@ -520,8 +545,8 @@
             </div>
             <div class="footer-col links">
                 <nav aria-label="Footer">
-                    <a href="index.html#about">About</a>
-                    <a href="index.html#faq">FAQ</a>
+                    <a class="home-fragment" data-fragment="#about">About</a>
+                    <a class="home-fragment" data-fragment="#faq">FAQ</a>
                     <a href="contact.html">Contact</a>
                 </nav>
             </div>

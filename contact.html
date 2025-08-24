@@ -64,13 +64,13 @@
             <div class="burger-dropdown-menu" id="burger-dropdown-menu">
               <a href="contact.html" class="burger-menu-item">Contact</a>
               <a href="pricing.html" class="burger-menu-item">Pricing</a>
-              <a href="index.html#about" class="burger-menu-item">About Us</a>
-              <a href="index.html#faq" class="burger-menu-item">FAQ</a>
+              <a href="/#about" class="burger-menu-item">About Us</a>
+              <a href="/#faq" class="burger-menu-item">FAQ</a>
             </div>
           </div>
         </div>
         <div class="navbar-mid">
-          <a href="index.html" class="navbar-logo-title">
+          <a href="#" class="navbar-logo-title home-link">
             <img src="icons/logo.png" class="navbar-logo-image" alt="YouTube Transcript Generator Logo">
             <span class="navbar-logo-text">YouTubeTranscriptGen.com</span>
           </a>
@@ -104,11 +104,22 @@
   </div>
 
   <script src="scripts/burger.js"></script>
+    <script>
+    (function(){
+      const isDev = location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.port === '5501' || location.port === '5500';
+      const homeHref = isDev ? 'index.html' : '/';
+      document.querySelectorAll('.home-link').forEach(el=> el.setAttribute('href', homeHref));
+      document.querySelectorAll('.home-fragment').forEach(el=> {
+        const frag = el.getAttribute('data-fragment') || '';
+        el.setAttribute('href', homeHref + (frag || ''));
+      });
+    })();
+    </script>
 
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-col brand">
-        <a href="index.html" class="footer-logo">
+  <a href="#" class="footer-logo home-link">
           <img src="icons/logo.png" alt="YouTube Transcript Generator Logo">
           <span>YouTubeTranscriptGen.com</span>
         </a>
@@ -116,8 +127,8 @@
       </div>
       <div class="footer-col links">
         <nav aria-label="Footer">
-          <a href="index.html#about">About</a>
-          <a href="index.html#faq">FAQ</a>
+          <a class="home-fragment" data-fragment="#about">About</a>
+          <a class="home-fragment" data-fragment="#faq">FAQ</a>
           <a href="contact.html">Contact</a>
         </nav>
       </div>
