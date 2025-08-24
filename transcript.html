@@ -178,7 +178,7 @@
         
         <div class="main-content">
             <!-- Static, crawlable intro to avoid soft-404 when JS-driven content is empty -->
-            <main class="page-intro" aria-label="Transcript page introduction">
+            <main id="page-intro" class="page-intro" aria-label="Transcript page introduction">
                 <h1>YouTube Transcript Generator — Transcript Viewer</h1>
                 <p>
                     Use this page to view and download transcripts for public YouTube videos. Paste a YouTube URL or a video ID into the input on the homepage and we will fetch and display the transcript here. Supported exports: TXT, SRT, VTT, JSON. Compatible with 100+ languages.
@@ -190,6 +190,30 @@
                     <p><strong>Note:</strong> JavaScript is required to fetch and display transcripts on this site. Please enable JavaScript or visit the <a href="/">homepage</a> to paste a YouTube link.</p>
                 </noscript>
             </main>
+
+            <script>
+                (function(){
+                    // Show the intro only when there is NO video identifier in the query string.
+                    var params = new URLSearchParams(window.location.search || '');
+                    var videoParamNames = ['video_id','videoId','v','transcriptId','videoIdParam','id'];
+                    var hasVideo = videoParamNames.some(function(n){
+                        var v = params.get(n);
+                        return v !== null && String(v).trim() !== '';
+                    });
+
+                    var intro = document.getElementById('page-intro');
+                    var loading = document.getElementById('loading-container');
+                    // If a video param is present, hide intro and keep the loading/Dynamic UI visible.
+                    if (hasVideo) {
+                        if (intro) intro.style.display = 'none';
+                        if (loading) loading.style.display = '';
+                    } else {
+                        // No video param: show the static intro and hide the JS loading placeholder.
+                        if (intro) intro.style.display = '';
+                        if (loading) loading.style.display = 'none';
+                    }
+                })();
+            </script>
 
             <div class="loading-container" id="loading-container">
                 <div class="loading-content">
