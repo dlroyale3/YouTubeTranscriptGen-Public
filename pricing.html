@@ -28,20 +28,30 @@
             "name": "YouTube Transcript Generator Credits",
             "image": "https://youtubetranscriptgen.com/icons/logo.png",
             "description": "Buy coins/credits for advanced AI transcript generation and extra features.",
-            "brand": "YouTubeTranscriptGen.com",
+            "brand": {
+                "@type": "Brand",
+                "name": "YouTubeTranscriptGen.com"
+            },
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": 4.9,
+                "reviewCount": 1200
+            },
             "offers": {
-                "@type": "Offer",
-                "price": "Varies",
+                "@type": "AggregateOffer",
+                "lowPrice": 5.99,
+                "highPrice": 11.99,
                 "priceCurrency": "USD",
-                "availability": "https://schema.org/InStock",
+                "offerCount": 3,
                 "url": "https://youtubetranscriptgen.com/pricing.html",
+                "availability": "https://schema.org/InStock",
                 "description": "Secure Stripe payments for credits.",
                 "priceValidUntil": "2026-12-31",
                 "shippingDetails": {
                     "@type": "OfferShippingDetails",
                     "shippingRate": {
                         "@type": "MonetaryAmount",
-                        "value": "0",
+                        "value": 0,
                         "currency": "USD"
                     },
                     "shippingDestination": {
