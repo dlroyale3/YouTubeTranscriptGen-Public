@@ -500,6 +500,49 @@ async function loadConversationFromDB() {
             const data = await response.json();
             
             // Verify we're loading conversation for the correct video
+            // Ensure currentVideoId is set from the conversation payload
+            if (data.video_id) {
+                currentVideoId = data.video_id;
+            }
+
+            // If the conversation row included transcript_data, display it immediately.
+            // Build a normalized transcript object and call displayTranscript to avoid
+            // relying on displaySavedTranscript being defined elsewhere.
+            try {
+                if (data.transcript_data) {
+                    console.log('✅ Conversation payload contains transcript_data - rendering now');
+                    try {
+                        const saved = data.transcript_data;
+                        const normalized = {
+                            video_id: data.video_id || currentVideoId,
+                            transcript: saved.transcript || [],
+                            language: saved.language || saved.language_name || 'Unknown',
+                            language_code: saved.language_code || 'en',
+                            is_translated: !!saved.is_translated
+                        };
+                        // Try to render immediately if displayTranscript exists; otherwise queue for later
+                        try {
+                            if (typeof displayTranscript === 'function') {
+                                displayTranscript(normalized);
+                            } else if (typeof window.displayTranscript === 'function') {
+                                window.displayTranscript(normalized);
+                            } else {
+                                // Store pending transcript for consumption by displayTranscript when it becomes available.
+                                // Avoid fragile polling; let the renderer consume the queued transcript on first invocation.
+                                try { window.__PENDING_TRANSCRIPT__ = normalized; } catch (_) {}
+                                console.log('⏳ Queued transcript for later rendering (displayTranscript not available yet)');
+                            }
+                        } catch (err) {
+                            console.warn('⚠️ Could not display embedded transcript_data:', err);
+                        }
+                    } catch (e) {
+                        console.warn('⚠️ Could not display embedded transcript_data:', e);
+                    }
+                }
+            } catch (e) {
+                console.debug('No embedded transcript_data present in conversation payload');
+            }
+
             if (data.video_id && data.video_id !== currentVideoId) {
                 console.warn('⚠️ Conversation video mismatch! Expected:', currentVideoId, 'Got:', data.video_id);
                 conversationHistory = [];
@@ -971,6 +1014,59 @@ function removeStartTime(videoId) {
 function clearAllStartTimes() {
     try { localStorage.removeItem(START_TIME_MAP_KEY); } catch (_) {}
 }
+// Broadcast helpers for cross-tab coordination
+function broadcastDeletedVideo(videoId) {
+    try {
+        localStorage.setItem('ytg_deleted_event', JSON.stringify({videoId: videoId, ts: Date.now()}));
+        // remove immediately to trigger storage event in other tabs
+        localStorage.removeItem('ytg_deleted_event');
+    } catch (_) {}
+}
+function broadcastClearedAll() {
+    try {
+        localStorage.setItem('ytg_cleared_all', JSON.stringify({ts: Date.now()}));
+        localStorage.removeItem('ytg_cleared_all');
+    } catch (_) {}
+}
+
+// Listen for cross-tab storage events to keep all tabs in sync
+window.addEventListener('storage', function(e) {
+    try {
+        if (!e.key) return;
+        if (e.key === 'ytg_deleted_event') {
+            const payload = JSON.parse(e.newValue || e.oldValue || '{}');
+            const vid = payload && payload.videoId;
+            if (vid) {
+                try { const saved = JSON.parse(localStorage.getItem(GUEST_CONVERSATIONS_KEY) || '{}'); delete saved[vid]; localStorage.setItem(GUEST_CONVERSATIONS_KEY, JSON.stringify(saved)); } catch (_) {}
+                try { removeLastMsgTime(vid); removeStartTime(vid); } catch (_) {}
+                try { unblockVideoFromSaving(vid); } catch (_) {}
+            }
+        }
+        if (e.key === 'ytg_cleared_all') {
+            try { localStorage.removeItem(GUEST_CONVERSATIONS_KEY); } catch (_) {}
+            try { localStorage.removeItem(LAST_MSG_MAP_KEY); } catch (_) {}
+            try { localStorage.removeItem(START_TIME_MAP_KEY); } catch (_) {}
+            try { clearAllBlockedVideos(); } catch (_) {}
+            try { window.__DISABLE_GUEST_TRANSFER__ = true; } catch (_) {}
+        }
+    } catch (_) {}
+});
+
+// If a transcript was queued while displayTranscript wasn't available, attempt to render it now
+window.addEventListener('DOMContentLoaded', () => {
+    try {
+        const pending = window.__PENDING_TRANSCRIPT__;
+        if (pending && (typeof displayTranscript === 'function' || typeof window.displayTranscript === 'function')) {
+            try {
+                (displayTranscript || window.displayTranscript)(pending);
+                delete window.__PENDING_TRANSCRIPT__;
+                console.log('✅ Rendered pending transcript on DOMContentLoaded');
+            } catch (err) {
+                console.warn('⚠️ Failed to render pending transcript on DOMContentLoaded:', err);
+            }
+        }
+    } catch (_) {}
+});
 function pickMostRecentISO(a, b) {
     const ta = a ? Date.parse(a) : NaN;
     const tb = b ? Date.parse(b) : NaN;
@@ -2760,6 +2856,21 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     function displayTranscript(data) {
+        // If a transcript was queued earlier because displayTranscript wasn't defined yet,
+        // consume and render it immediately instead of waiting for external polling.
+        try {
+            const pending = window.__PENDING_TRANSCRIPT__;
+            if (pending && pending.video_id && pending.video_id === data.video_id) {
+                try {
+                    // Clear pending before rendering to avoid re-entrancy
+                    try { delete window.__PENDING_TRANSCRIPT__; } catch (_) { window.__PENDING_TRANSCRIPT__ = null; }
+                    data = pending; // Override data with pending normalized transcript
+                    console.log('▶️ Consumed queued transcript and rendering now');
+                } catch (e) {
+                    console.warn('⚠️ Failed to consume pending transcript:', e);
+                }
+            }
+        } catch (_) {}
         hideLoading();
         hideError();
 

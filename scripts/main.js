@@ -277,6 +277,8 @@ async function deleteSpecificConversation(videoId) {
         const res = await fetch(`${API_URL}/api/conversations/${videoId}`, { method: 'DELETE', credentials: 'include', headers: { 'Content-Type': 'application/json' } });
         if (res.ok) {
             try { removeLastMsgTime(videoId); removeStartTime(videoId); } catch {}
+            // Broadcast to other tabs so they also purge guest-local copies and state
+            try { if (typeof broadcastDeletedVideo === 'function') broadcastDeletedVideo(videoId); } catch {}
             await loadConversationHistory();
         }
     } catch {}
@@ -290,6 +292,7 @@ async function clearAllConversations() {
         if (res.ok) {
             // Purge any guest-cached conversations too to avoid re-transfer
             try { localStorage.removeItem('youtube_transcript_conversations'); } catch {}
+            try { if (typeof broadcastClearedAll === 'function') broadcastClearedAll(); } catch {}
             // Disable guest transfer flag for this page lifecycle
             try { window.__DISABLE_GUEST_TRANSFER__ = true; } catch {}
             // Also clear local last-message and start-time maps
