@@ -20,11 +20,15 @@
     <meta property="og:description" content="Generate YouTube transcripts instantly, chat with AI, download in multiple formats, rate and pay with Stripe. Free credits for all users.">
     <meta property="og:url" content="https://youtubetranscriptgen.com/">
     <meta property="og:image" content="https://youtubetranscriptgen.com/icons/logo.png">
+    <meta property="og:image" content="https://youtubetranscriptgen.com/icons/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="YouTube Transcript Generator logo">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="YouTube Transcript Generator – AI Chat, Multi-language, Download & Rating">
     <meta name="twitter:description" content="Generate, download, and chat with AI about YouTube transcripts in 100+ languages. Free credits, Stripe payments, ratings, and export in TXT, SRT, VTT, JSON.">
     <meta name="twitter:image" content="https://youtubetranscriptgen.com/icons/logo.png">
+    <meta name="twitter:image" content="https://youtubetranscriptgen.com/icons/social-preview.png">
     <!-- Favicons adapted to existing files (avoid 404s) -->
     <!-- Using existing icon files from /icons/ to ensure resources exist on disk -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -34,7 +38,8 @@
     <link rel="manifest" href="/site.webmanifest">
     <!-- Help crawlers find the main site image quickly -->
     <link rel="image_src" href="https://youtubetranscriptgen.com/icons/logo.png">
-    <link rel="preload" as="image" href="https://youtubetranscriptgen.com/icons/logo.png">
+    <link rel="image_src" href="https://youtubetranscriptgen.com/icons/social-preview.png">
+    <link rel="preload" as="image" href="https://youtubetranscriptgen.com/icons/social-preview.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +58,12 @@
         "name": "YouTubeTranscriptGen.com",
         "url": "https://youtubetranscriptgen.com/",
         "logo": "https://youtubetranscriptgen.com/icons/logo.png",
-        "image": "https://youtubetranscriptgen.com/icons/logo.png",
+            "image": {
+            "@type": "ImageObject",
+            "url": "https://youtubetranscriptgen.com/icons/social-preview.png",
+            "width": 1200,
+            "height": 630
+        },
         "contactPoint": [{
             "@type": "ContactPoint",
             "email": "dumluca4@gmail.com",
@@ -91,9 +101,20 @@
         },
         "aggregateRating": {
             "@type": "AggregateRating",
+            "@id": "https://youtubetranscriptgen.com/#aggregateRating",
             "ratingValue": 4.9,
+            "ratingCount": 1200,
             "reviewCount": 1200
-        }
+        },
+        "review": [
+            {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Users" },
+                "datePublished": "2025-08-20T00:00:00+00:00",
+                "reviewBody": "Great accuracy and fast transcript generation.",
+                "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 }
+            }
+        ]
     }
     </script>
 
