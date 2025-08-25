@@ -41,14 +41,15 @@
       const data = {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
+        '@id': 'https://youtubetranscriptgen.com/#softwareapp',
         'name': 'YouTube Transcript Generator',
         'applicationCategory': 'UtilityApplication',
         'operatingSystem': 'Web',
         'url': 'https://youtubetranscriptgen.com',
-        'offers': { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+        'offers': { '@type': 'Offer', 'price': 0, 'priceCurrency': 'USD' },
         'aggregateRating': {
           '@type': 'AggregateRating',
-          'ratingValue': Number(avg || 0).toFixed(2),
+          'ratingValue': Number(avg || 0),
           'ratingCount': Number(count || 0)
         }
       };
