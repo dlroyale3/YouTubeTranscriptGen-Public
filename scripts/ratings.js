@@ -33,6 +33,8 @@
 
   function injectAggregateRatingLD(avg, count) {
     try {
+      // Inject a minimal, authoritative AggregateRating JSON-LD only.
+      // Using the stable @id ensures Google treats this as the same entity across pages.
       const old = document.getElementById('aggregate-rating-ld-json');
       if (old) old.remove();
       const script = document.createElement('script');
@@ -40,18 +42,12 @@
       script.id = 'aggregate-rating-ld-json';
       const data = {
         '@context': 'https://schema.org',
-        '@type': 'SoftwareApplication',
-        '@id': 'https://youtubetranscriptgen.com/#softwareapp',
-        'name': 'YouTube Transcript Generator',
-        'applicationCategory': 'UtilityApplication',
-        'operatingSystem': 'Web',
-        'url': 'https://youtubetranscriptgen.com',
-        'offers': { '@type': 'Offer', 'price': 0, 'priceCurrency': 'USD' },
-        'aggregateRating': {
-          '@type': 'AggregateRating',
-          'ratingValue': Number(avg || 0),
-          'ratingCount': Number(count || 0)
-        }
+        '@type': 'AggregateRating',
+        '@id': 'https://youtubetranscriptgen.com/#aggregateRating',
+        'ratingValue': Number(avg || 0),
+        'ratingCount': Number(count || 0),
+        // point this aggregate rating at the SoftwareApplication entity
+        'itemReviewed': { '@id': 'https://youtubetranscriptgen.com/#softwareapp' }
       };
       script.textContent = JSON.stringify(data);
       document.body.appendChild(script);
