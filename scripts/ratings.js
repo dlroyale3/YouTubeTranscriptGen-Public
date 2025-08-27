@@ -46,8 +46,12 @@
         '@id': 'https://youtubetranscriptgen.com/#aggregateRating',
         'ratingValue': Number(avg || 0),
         'ratingCount': Number(count || 0),
-        // point this aggregate rating at the SoftwareApplication entity
-        'itemReviewed': { '@id': 'https://youtubetranscriptgen.com/#softwareapp' }
+        // point this aggregate rating at the SoftwareApplication entity and include type/name
+        'itemReviewed': {
+          '@type': 'SoftwareApplication',
+          '@id': 'https://youtubetranscriptgen.com/#softwareapp',
+          'name': 'YouTube Transcript Generator'
+        }
       };
       script.textContent = JSON.stringify(data);
       document.body.appendChild(script);
