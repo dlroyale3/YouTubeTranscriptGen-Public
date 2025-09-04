@@ -5,6 +5,12 @@ html, body {
     background: #f3eeee;
 }
 
+/* Dynamic layout variables */
+:root {
+    --nav-height: 64px; /* default; JS will update if navbar height changes */
+    --toast-offset: 8px; /* gap below navbar for notifications */
+}
+
 .app {
     min-height: 100%;
     display: flex;
@@ -17,12 +23,11 @@ html, body {
 .navbar-container {
     height: 64px;
     width: 100%;
-    /* Keep navbar visible at the top during scroll on the entire page */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1100;
+    z-index: 1100; /* keep below notifications (which will use >3000) */
 }
 
 .navbar {
@@ -2213,12 +2218,24 @@ html, body {
 }
 
 /* Premium toast notification (shared) */
-.toast-container { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 12px; }
+/* Position relative to navbar so it's never hidden */
+.toast-container { position: fixed; top: calc(var(--nav-height) + var(--toast-offset)); right: 20px; z-index: 3500; display: flex; flex-direction: column; gap: 12px; }
 .toast { display:flex; align-items:flex-start; gap:12px; min-width: 320px; max-width: 420px; padding:14px 16px; border-radius:12px;
     background: linear-gradient(135deg,#0ea5e9 0%,#2563eb 100%);
     color:#fff; box-shadow:0 12px 30px rgba(37,99,235,.35), 0 2px 8px rgba(0,0,0,.15);
     border: 1px solid rgba(255,255,255,.18); transform: translateY(-10px); opacity:0; transition: all .35s ease; }
 .toast.show { transform: translateY(0); opacity: 1; }
+/* Single legacy notification (#notification) positioning override */
+#notification {
+    top: calc(var(--nav-height) + var(--toast-offset));
+    z-index: 3600 !important;
+}
+
+/* Ensure any generic alert banners appear below navbar */
+.alert-banner, .toast-notification, .app-toast {
+    top: calc(var(--nav-height) + var(--toast-offset));
+    z-index: 3450;
+}
 .toast .icon { width:28px; height:28px; border-radius:50%; background: rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:16px; }
 .toast .content { flex:1; }
 .toast .title { font-weight:700; font-size:14px; letter-spacing:.2px; }

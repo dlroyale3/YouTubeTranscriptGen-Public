@@ -2199,6 +2199,43 @@ function toggleProfileDropdown() {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
+    /* === Notification overlap fix: compute navbar height and reposition toasts === */
+    (function maintainNotificationPosition(){
+        const NAV_SELECTORS = ['.navbar-container', '.navbar', 'header', '#navbar'];
+        const TOAST_SELECTORS = ['#notification', '.toast-container', '.toast-notification', '.app-toast', '.alert-banner'];
+        function getNav(){
+            for (const sel of NAV_SELECTORS){
+                const el = document.querySelector(sel);
+                if (el) return el;
+            }
+            return null;
+        }
+        function apply(){
+            const nav = getNav();
+            const h = nav ? Math.max(40, Math.round(nav.getBoundingClientRect().height)) : 64;
+            document.documentElement.style.setProperty('--nav-height', h + 'px');
+            TOAST_SELECTORS.forEach(sel => {
+                document.querySelectorAll(sel).forEach(node => {
+                    if (node instanceof HTMLElement) {
+                        node.style.top = `calc(${h}px + var(--toast-offset, 8px))`;
+                        if (!node.style.zIndex) node.style.zIndex = '3500';
+                    }
+                });
+            });
+        }
+        // Initial + delayed passes for late layout shifts
+        apply();
+        window.addEventListener('resize', apply, { passive: true });
+        ['load','orientationchange'].forEach(evt => window.addEventListener(evt, apply));
+        setTimeout(apply,120); setTimeout(apply,600); setTimeout(apply,1500);
+        // Observe DOM for newly added notification nodes
+        const mo = new MutationObserver(muts => {
+            if (muts.some(m => Array.from(m.addedNodes).some(n => n.nodeType===1 && TOAST_SELECTORS.some(sel => n.matches?.(sel) || n.querySelector?.(sel))))) {
+                apply();
+            }
+        });
+        try { mo.observe(document.body, { childList:true, subtree:true }); } catch(_){ }
+    })();
     // Load blocked videos list first
     loadBlockedVideos();
     
