@@ -611,6 +611,15 @@ html, body {
     .home-page .navbar-right { gap: 8px; }
     .home-page .navbar-container { height: 56px; }
     .home-page .navbar { min-height: 56px; }
+    /* Contact page: reuse compact brand and navbar sizing */
+    .contact-page .navbar { padding: 0 12px; }
+    .contact-page .navbar-logo-image { width: 28px; height: 28px; margin-right: 6px; }
+    .contact-page .navbar-logo-text { font-size: 0; line-height: 1; }
+    .contact-page .navbar-logo-text::after { content: "YouTube Transcript Gen"; font-size: 16px; font-weight: 600; color: #333; }
+    .contact-page .navbar-container { height: 56px; }
+    .contact-page .navbar { min-height: 56px; }
+    /* Prevent horizontal overflow on mobile */
+    body.contact-page { overflow-x: hidden; }
     .home-page .main-header { margin: 20px auto 0; padding: 0 16px 28px; gap: 16px; }
     .home-page .header-title { font-size: 28px; line-height: 1.25; }
     .home-page .main-container-area { min-height: 0; padding: 8px; }
@@ -643,6 +652,9 @@ html, body {
     .home-page .navbar-logo-text::after { font-size: 14px; }
     .home-page .header-title { font-size: 24px; }
     .home-page .rating-input .star { width: 36px; height: 36px; font-size: 22px; }
+    .contact-page .navbar-logo-text { display:inline-block; }
+    .contact-page .navbar-logo-text::after { font-size: 14px; }
+    .contact-page .header-title { font-size: 24px; }
 }
 
 /* Bottom sections (below the fold) */
