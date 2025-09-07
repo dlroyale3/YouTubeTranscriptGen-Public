@@ -153,6 +153,15 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Mobile-only subnav row for Coins + Back (mirrors transcript page layout) -->
+                <div class="subnav-economy-row" id="pricing-subnav-row" aria-label="Secondary navigation">
+                    <div class="subnav-inner" id="pricing-subnav-inner">
+                        <!-- JS will move .nav-back (left) and .nav-credits (right) here on small screens -->
+                        <div class="subnav-left" id="pricing-subnav-left"></div>
+                        <div class="subnav-right" id="pricing-subnav-right"></div>
+                    </div>
+                </div>
                 <div class="navbar-mid">
                     <a href="#" class="navbar-logo-title home-link">
                         <img src="icons/logo.png" class="navbar-logo-image" alt="YouTube Transcript Generator Logo">
@@ -244,6 +253,65 @@
     </div>
 
     <script src="scripts/pricing.js"></script>
+    <script>
+    // Mobile subnav and layout variables (header heights) setup
+    (function(){
+        const mq = () => window.matchMedia('(max-width: 768px)').matches;
+        const nav = document.querySelector('.navbar-container');
+        const subnav = document.getElementById('pricing-subnav-row');
+    const navRight = document.querySelector('.navbar-right');
+    const subnavLeft = document.getElementById('pricing-subnav-left');
+    const subnavRight = document.getElementById('pricing-subnav-right');
+
+        const creditsEl = document.querySelector('.nav-credits');
+        const backBtn = document.querySelector('.nav-back');
+
+        let placed = false;
+
+        function updateHeights(){
+            const navH = nav ? nav.offsetHeight : 0;
+            const subnavVisible = mq() && subnav && getComputedStyle(subnav).display !== 'none';
+            const subH = subnavVisible ? subnav.offsetHeight : 0;
+            document.documentElement.style.setProperty('--nav-height', navH + 'px');
+            document.documentElement.style.setProperty('--subnav-height', subH + 'px');
+        }
+
+    function placeMobile(){
+            if (!mq()) return;
+            if (!placed) {
+        // Order: Coins then Go back, placed together near center
+        if (creditsEl && subnavLeft) subnavLeft.appendChild(creditsEl);
+        if (backBtn && subnavLeft) subnavLeft.appendChild(backBtn);
+                placed = true;
+            }
+            updateHeights();
+        }
+
+        function placeDesktop(){
+            if (placed) {
+                if (navRight && backBtn) navRight.appendChild(backBtn);
+                if (navRight && creditsEl) navRight.insertBefore(creditsEl, navRight.firstElementChild);
+                placed = false;
+            }
+            updateHeights();
+        }
+
+        function onResize(){
+            if (mq()) placeMobile(); else placeDesktop();
+        }
+
+        // Initial
+        onResize();
+        window.addEventListener('resize', () => { requestAnimationFrame(onResize); });
+        window.addEventListener('load', updateHeights);
+        // Observe subnav content size changes (fonts/images load)
+        try {
+            const ro = new ResizeObserver(updateHeights);
+            if (nav) ro.observe(nav);
+            if (subnav) ro.observe(subnav);
+        } catch {}
+    })();
+    </script>
     <script>
     (function(){
         const isDev = location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.port === '5501' || location.port === '5500';

@@ -1,8 +1,12 @@
 /* Base & layout: reuse palette and navbar look from existing pages */
-html, body { margin: 0; height: 100%; font-family: "Poppins", sans-serif; background: #f3eeee; }
-.app { min-height: 100%; display: flex; flex-direction: column; }
+html, body { margin: 0; height: 100%; font-family: "Poppins", sans-serif; background: #f3eeee; overflow-x: hidden; overflow-y: auto; }
+*, *::before, *::after { box-sizing: border-box; }
 
-.navbar-container { height: 64px; width: 100%; position: sticky; top: 0; z-index: 100; }
+/* Dynamic layout variables (aligned with transcript page) */
+:root { --nav-height: 64px; --subnav-height: 0px; --toast-offset: 8px; }
+.app { min-height: 100%; display: flex; flex-direction: column; padding-top: calc(var(--nav-height) + var(--subnav-height)); }
+
+.navbar-container { height: 64px; width: 100%; position: fixed; top: 0; left: 0; right: 0; z-index: 1100; }
 .navbar { background-color: white; min-height: 64px; display: flex; flex-direction: row; justify-content: center; padding: 0 16px; align-items: center; box-shadow: 0 2px 3px rgba(0,0,0,.05); border-bottom: 1px solid #eee; }
 .navbar-mid { display: flex; align-items: center; justify-content: center; }
 .navbar-left { position: absolute; left: 16px; display: flex; align-items: center; gap: 8px; }
@@ -29,7 +33,7 @@ html, body { margin: 0; height: 100%; font-family: "Poppins", sans-serif; backgr
 .burger-menu-item:last-child { border-radius: 0 0 8px 8px; }
 
 /* Page header */
-.pricing-page { max-width: 1200px; width: 100%; margin: 32px auto; padding: 0 32px 48px; display: flex; flex-direction: column; gap: 24px; }
+.pricing-page { max-width: 1200px; width: 100%; margin: 32px auto; padding: 0 32px 48px; display: flex; flex-direction: column; gap: 24px; overflow-x: hidden; }
 .pricing-page { min-height: 70vh; }
 .pricing-header { text-align: center; }
 .pricing-header .title { font-size: 38px; margin: 0; color: #1a1a1a; font-weight: 700; }
@@ -160,4 +164,69 @@ html, body { margin: 0; height: 100%; font-family: "Poppins", sans-serif; backgr
 @media (max-width: 800px) {
 	.site-footer .footer-inner { grid-template-columns: 1fr; text-align: left; }
 	.site-footer .meta { text-align: left; }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+	/* Navbar compact branding like other pages */
+	.navbar-container { height: 56px; }
+	.navbar { min-height: 56px; padding: 0 12px; }
+	.navbar-right { gap: 8px; }
+	.navbar-logo-image { width: 28px; height: 28px; margin-right: 6px; display: inline-block; }
+	.navbar-logo-text { font-size: 0; line-height: 1; display: inline-block; }
+	.navbar-logo-text::after { content: "YouTube Transcript Gen"; font-size: 16px; font-weight: 600; color: #333; }
+	/* Keep coins, remove back button */
+	.nav-back { display: none; }
+	.nav-credits { font-size: 15px; padding: 6px 10px; }
+
+	/* Page spacing */
+	.pricing-page { margin: 16px auto; padding: 0 12px 32px; gap: 16px; }
+	.pricing-header .title { font-size: 28px; }
+	.pricing-header .subtitle { font-size: 14px; }
+	.app { display: block !important; min-height: 0 !important; height: auto !important; flex: none !important; }
+	.pricing-grid { display: block !important; height: auto !important; min-height: 0 !important; max-height: none !important; overflow: visible !important; }
+	.plan-card { display: block !important; height: auto !important; min-height: 0 !important; max-height: none !important; overflow: visible !important; }
+
+	/* Cards compact but readable */
+		.plan-card { padding: 16px; border-radius: 12px; margin-bottom: 18px; }
+		.plan-card:last-child { margin-bottom: 0; }
+	.plan-name, .plan-coins { font-size: 18px; }
+	.plan-price .currency { font-size: 18px; }
+	.plan-price .amount { font-size: 32px; }
+	.plan-features { gap: 6px; }
+	.popular-badge { top: -10px; }
+
+	/* Footer full-width on mobile */
+	.site-footer .footer-inner { width: 100%; max-width: none; margin: 0; padding-left: 12px; padding-right: 12px; }
+}
+
+/* ===== Mobile subnav (coins + back) like transcript page ===== */
+.subnav-economy-row { position: fixed; top: var(--nav-height); left: 0; right: 0; background: #ffffff; border-bottom: 1px solid #eee; z-index: 1099; display: none; min-height: 48px; }
+.subnav-economy-row .subnav-inner { max-width: 1100px; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.subnav-left, .subnav-right { display: flex; align-items: center; gap: 12px; }
+
+/* Only show subnav on mobile; desktop keeps items in top-right */
+@media (max-width: 768px) {
+	.subnav-economy-row { display: block; }
+	/* Show only the left group so both items sit together centered */
+	.subnav-economy-row .subnav-right { display: none; }
+}
+
+/* Prevent horizontal overflow from dropdowns/badges */
+.burger-dropdown-menu, .popular-badge, .plan-card, .nav-credits { max-width: 100%; }
+.pricing-page, .pricing-grid { overflow-x: hidden; }
+
+/* Ensure only the whole page scrolls; cards/grid must not create inner scroll areas */
+.pricing-page { overflow-y: visible; }
+.pricing-grid { overflow-y: visible; height: auto; max-height: none; }
+.plan-card { overflow: visible; height: auto; max-height: none; }
+
+/* Mobile: hide back only in top navbar; show in subnav */
+@media (max-width: 768px) {
+	.navbar-right .nav-back { display: none !important; }
+	.subnav-economy-row .nav-back { display: inline-flex !important; }
+	.subnav-economy-row .nav-credits { margin: 0; }
+		.pricing-page { display: block !important; overflow: visible !important; }
+		.pricing-grid { display: block !important; overflow: visible !important; }
+		.plan-card { display: block !important; overflow: visible !important; }
 }
