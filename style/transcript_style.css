@@ -2457,14 +2457,15 @@ html, body {
     html, body { overflow-x: hidden; }
     .main-content {
         /* Let .app's padding-top offset the fixed headers; keep this as a flexible container */
+        /* padding: 4px 4px 6px 4px; */
         padding: 12px;
         box-sizing: border-box;
-    height: calc(100vh - (var(--nav-height) + var(--subnav-height))); /* exact space below fixed navbars */
-        max-height: none;    /* override desktop cap that caused clipping */
-        overflow: hidden;    /* prevent page scroll; inner panes handle their own scroll */
-        min-height: 0;       /* allow children to size/scroll correctly in flex context */
-        overflow-x: hidden;  /* prevent any horizontal spill */
-        flex: 1;             /* fill remaining space within .app */
+        height: calc(100vh - (var(--nav-height) + var(--subnav-height)));
+        max-height: none;
+        overflow: hidden;
+        min-height: 0;
+        overflow-x: hidden;
+        flex: 1;
         display: flex;
         flex-direction: column;
     }
@@ -2497,12 +2498,13 @@ html, body {
 
     .transcript-column,
     .chat-column {
-    width: 100%;
-    /* Equal split: each takes half of available height in the container */
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 0; /* allow internal scrollers to get space */
+        width: 100%;
+        /* Make each column taller than 50% of the available height */
+        flex: 0 0 62vh;
+        display: flex;
+        flex-direction: column;
+        min-height: 320px;
+        max-height: none;
     }
     
     .chat-container { height: calc(100% - 60px); min-height: 0; }
@@ -2584,9 +2586,10 @@ html, body {
     .message-content { max-width: 100%; }
     .ai-typing-message .message-content { max-width: 100%; }
 
-    /* Mobile branding: title-only */
-    .navbar-logo-image { display: none; }
-    .navbar-logo-text { font-size: 18px; }
+    /* Mobile branding: logo image + short label, like index */
+    .navbar-logo-image { width: 28px; height: 28px; margin-right: 6px; display: inline-block; }
+    .navbar-logo-text { font-size: 0; line-height: 1; display: inline-block; }
+    .navbar-logo-text::after { content: "YouTube Transcript Gen"; font-size: 16px; font-weight: 600; color: #333; }
 
     /* Bottom: stack input and button for better fit */
     .bottom-transcript-search .input-controls { flex-direction: column; align-items: stretch; }
