@@ -600,12 +600,49 @@ html, body {
         gap: 24px;
         align-items: center;
     }
-    
-    .features-column {
-        width: 100%;
-        max-width: 400px;
-        align-items: center;
-    }
+    /* Home-specific responsive tweaks */
+    .home-page .navbar { padding: 0 12px; }
+    .home-page .navbar-logo-image { width: 28px; height: 28px; margin-right: 6px; }
+    /* Shorten brand label on mobile: hide original text (with .com) and inject a shorter variant */
+    .home-page .navbar-logo-text { font-size: 0; line-height: 1; }
+    .home-page .navbar-logo-text::after { content: "YouTube Transcript Gen"; font-size: 16px; font-weight: 600; color: #333; }
+    .home-page .pricing-link { display:none; }
+    .home-page .auth-section { display:flex; }
+    .home-page .navbar-right { gap: 8px; }
+    .home-page .navbar-container { height: 56px; }
+    .home-page .navbar { min-height: 56px; }
+    .home-page .main-header { margin: 20px auto 0; padding: 0 16px 28px; gap: 16px; }
+    .home-page .header-title { font-size: 28px; line-height: 1.25; }
+    .home-page .main-container-area { min-height: 0; padding: 8px; }
+    .home-page .main-area-inner-box { position: absolute; inset: 8px; border-width: 1px; padding: 12px; }
+    .home-page .input-container { max-width: 520px; width: 100%; margin: 0 auto; padding-bottom: 10px; }
+    .home-page .main-container-area-elements-text-above { font-size: 16px; margin-bottom: 14px; }
+    .home-page .input-controls { flex-direction: column; gap: 10px; }
+    .home-page .youtube-input { font-size: 15px; padding: 12px 14px; }
+    .home-page .get-transcript-btn { width: 100%; padding: 12px 14px; font-size: 15px; }
+    .home-page .error-message { position: static; margin-top: 6px; }
+    .home-page .features-container { gap: 16px; }
+    .home-page .features-column { align-items: center; text-align: center; }
+    .home-page .feature-item { justify-content: center; }
+    .home-page .feature-item span { font-size: 15px; text-align: center; }
+    .home-page .check-icon { width: 18px; height: 18px; }
+    .home-page .index-bottom { padding: 24px 12px 48px; gap: 28px; }
+    .home-page .section-title { font-size: 22px; }
+    .home-page .rating-card, .home-page .about-band, .home-page .use-band, .home-page .faq-band { padding: 16px; border-radius: 12px; }
+    .home-page .rating-input .star { width: 40px; height: 40px; font-size: 24px; }
+    .home-page .about-grid, .home-page .use-grid { grid-template-columns: 1fr; }
+    .home-page .highlight-list { gap: 8px; }
+    .home-page .chip { font-size: 12px; padding: 6px 10px; }
+    .home-page .site-footer .footer-inner { padding: 24px 16px; }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+    /* Keep the shortened brand visible even on very small screens */
+    .home-page .navbar-logo-text { display:inline-block; }
+    .home-page .navbar-logo-text::after { font-size: 14px; }
+    .home-page .header-title { font-size: 24px; }
+    .home-page .rating-input .star { width: 36px; height: 36px; font-size: 22px; }
 }
 
 /* Bottom sections (below the fold) */
