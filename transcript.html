@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>YouTube Transcript Generator — Transcript Viewer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/transcript_style.css">
@@ -156,6 +157,13 @@
             </div>
         </div>
         
+        <!-- Mobile-only subnav row for Pricing + Coins (populated via JS by moving existing elements) -->
+        <div class="subnav-economy-row" id="subnav-economy-row" aria-label="Secondary navigation">
+            <div class="subnav-inner" id="subnav-inner">
+                <!-- JS will move .pricing-link and #credits-display here on small screens -->
+            </div>
+        </div>
+
         <div class="main-content">
             <!-- Static, crawlable intro to avoid soft-404 when JS-driven content is empty -->
             <main id="page-intro" class="page-intro" aria-label="Transcript page introduction">

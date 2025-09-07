@@ -2199,10 +2199,11 @@ function toggleProfileDropdown() {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    /* === Notification overlap fix: compute navbar height and reposition toasts === */
+    /* === Header sizing + notification offsets (navbar + optional subnav) === */
     (function maintainNotificationPosition(){
         const NAV_SELECTORS = ['.navbar-container', '.navbar', 'header', '#navbar'];
         const TOAST_SELECTORS = ['#notification', '.toast-container', '.toast-notification', '.app-toast', '.alert-banner'];
+        const SUBNAV_SELECTOR = '#subnav-economy-row';
         function getNav(){
             for (const sel of NAV_SELECTORS){
                 const el = document.querySelector(sel);
@@ -2214,10 +2215,15 @@ document.addEventListener('DOMContentLoaded', async function() {
             const nav = getNav();
             const h = nav ? Math.max(40, Math.round(nav.getBoundingClientRect().height)) : 64;
             document.documentElement.style.setProperty('--nav-height', h + 'px');
+            // Measure subnav height if visible
+            const subnav = document.querySelector(SUBNAV_SELECTOR);
+            const subnavVisible = subnav && window.getComputedStyle(subnav).display !== 'none';
+            const sh = subnavVisible ? Math.round(subnav.getBoundingClientRect().height) : 0;
+            document.documentElement.style.setProperty('--subnav-height', sh + 'px');
             TOAST_SELECTORS.forEach(sel => {
                 document.querySelectorAll(sel).forEach(node => {
                     if (node instanceof HTMLElement) {
-                        node.style.top = `calc(${h}px + var(--toast-offset, 8px))`;
+                        node.style.top = `calc(${h}px + ${sh}px + var(--toast-offset, 8px))`;
                         if (!node.style.zIndex) node.style.zIndex = '3500';
                     }
                 });
@@ -2235,6 +2241,59 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
         try { mo.observe(document.body, { childList:true, subtree:true }); } catch(_){ }
+    })();
+
+    /* === Mobile: Move Pricing + Coins under navbar and restore on desktop === */
+    (function setupMobileSubnav(){
+        const pricingLink = document.querySelector('.pricing-link');
+        const creditsDisplay = document.getElementById('credits-display');
+        const subnavInner = document.getElementById('subnav-inner');
+        const navbarRight = document.querySelector('.navbar-right');
+        if (!subnavInner || !navbarRight || !pricingLink || !creditsDisplay) return;
+
+        // Placeholders to restore original order
+        const pricingPlaceholder = document.createComment('pricing-placeholder');
+        const creditsPlaceholder = document.createComment('credits-placeholder');
+        if (pricingLink.parentNode) pricingLink.parentNode.insertBefore(pricingPlaceholder, pricingLink);
+        if (creditsDisplay.parentNode) creditsDisplay.parentNode.insertBefore(creditsPlaceholder, creditsDisplay);
+
+        let __moving = false;
+        function moveForWidth(){
+            if (__moving) return; // prevent re-entrancy during rapid resize
+            __moving = true;
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const subnavRow = document.getElementById('subnav-economy-row');
+            if (isMobile) {
+                // Show subnav row and move items
+                if (subnavRow) subnavRow.style.display = 'block';
+                if (pricingLink && pricingLink.parentElement !== subnavInner) subnavInner.appendChild(pricingLink);
+                if (creditsDisplay && creditsDisplay.parentElement !== subnavInner) subnavInner.appendChild(creditsDisplay);
+            } else {
+                // Hide subnav row and restore items to navbar-right
+                if (subnavRow) subnavRow.style.display = 'none';
+                if (pricingPlaceholder.parentNode && pricingLink.parentElement !== pricingPlaceholder.parentNode) {
+                    pricingPlaceholder.parentNode.insertBefore(pricingLink, pricingPlaceholder.nextSibling);
+                }
+                if (creditsPlaceholder.parentNode && creditsDisplay.parentElement !== creditsPlaceholder.parentNode) {
+                    creditsPlaceholder.parentNode.insertBefore(creditsDisplay, creditsPlaceholder.nextSibling);
+                }
+            }
+            // Recompute header heights for offsets (no synthetic resize to avoid recursion)
+            try {
+                const nav = document.querySelector('.navbar-container') || document.querySelector('.navbar');
+                const navH = nav ? Math.max(40, Math.round(nav.getBoundingClientRect().height)) : 64;
+                document.documentElement.style.setProperty('--nav-height', navH + 'px');
+                const subnav = document.getElementById('subnav-economy-row');
+                const visible = subnav && window.getComputedStyle(subnav).display !== 'none';
+                const subH = visible ? Math.round(subnav.getBoundingClientRect().height) : 0;
+                document.documentElement.style.setProperty('--subnav-height', subH + 'px');
+            } catch(_) {}
+            __moving = false;
+        }
+
+        moveForWidth();
+        window.addEventListener('resize', moveForWidth, { passive: true });
+        window.addEventListener('orientationchange', moveForWidth);
     })();
     // Load blocked videos list first
     loadBlockedVideos();
