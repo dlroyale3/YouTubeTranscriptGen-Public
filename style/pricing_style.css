@@ -43,6 +43,24 @@ html, body { margin: 0; height: 100%; font-family: "Poppins", sans-serif; backgr
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
 @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } }
 
+/* Desktop-only refinements: remove any stray scrollbars and enforce single-line feature items */
+@media (min-width: 901px) {
+	/* Ensure outer page handles scrolling only */
+	html, body, .app, .pricing-page { overflow-y: visible; }
+	.pricing-grid { overflow: visible !important; height: auto !important; max-height: none !important; }
+	.plan-card { overflow: hidden; } /* hide any accidental overflow inside card */
+	/* Feature list: keep each feature to one line with ellipsis */
+	.plan-features li { 
+		white-space: nowrap; 
+		overflow: hidden; 
+		text-overflow: ellipsis; 
+		display: block; 
+		width: 100%;
+	}
+	/* Provide full text on hover via title attribute styling fallback (title added via JS optional) */
+	.plan-features li:hover { cursor: help; }
+}
+
 /* Cards */
 .plan-card { background: white; border: 2px solid #000; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 6px 18px rgba(0,0,0,0.08); position: relative; }
 .plan-card .plan-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
